@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" role="img" aria-label="Placeholder: The backlit bar (photo to come)">
+<style>@media (max-width: 332px) { .ph-label { display: none; } }</style>
+<defs>
+  <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#120d07"/><stop offset=".6" stop-color="#0E0A06"/><stop offset="1" stop-color="#070602"/></linearGradient>
+  <radialGradient id="pool" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FF9A2E" stop-opacity=".55"/><stop offset=".35" stop-color="#874E11" stop-opacity=".32"/><stop offset="1" stop-color="#4C2807" stop-opacity="0"/></radialGradient>
+  <radialGradient id="soft" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#B98442" stop-opacity=".35"/><stop offset="1" stop-color="#4C2807" stop-opacity="0"/></radialGradient>
+  <radialGradient id="dot" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#F4D696" stop-opacity="1"/><stop offset=".25" stop-color="#FF9A2E" stop-opacity=".7"/><stop offset="1" stop-color="#FF9A2E" stop-opacity="0"/></radialGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F4D696"/><stop offset=".5" stop-color="#DDB06B"/><stop offset="1" stop-color="#874E11"/></linearGradient>
+  <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9A2E" stop-opacity=".75"/><stop offset=".55" stop-color="#B98442" stop-opacity=".55"/><stop offset="1" stop-color="#874E11" stop-opacity=".35"/></linearGradient>
+  <linearGradient id="leather" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1a0c"/><stop offset="1" stop-color="#0d0905"/></linearGradient>
+  <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4D696" stop-opacity=".28"/><stop offset="1" stop-color="#FF9A2E" stop-opacity="0"/></linearGradient>
+  <linearGradient id="liquid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4D696" stop-opacity=".9"/><stop offset="1" stop-color="#874E11" stop-opacity=".9"/></linearGradient>
+  <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070602" stop-opacity="0"/><stop offset="1" stop-color="#070602" stop-opacity=".92"/></linearGradient>
+  <radialGradient id="vig" cx=".5" cy=".45" r=".75"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".6"/></radialGradient>
+  <filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" stitchTiles="stitch" seed="7"/><feColorMatrix values="0 0 0 0 1  0 0 0 0 .86  0 0 0 0 .62  0 0 0 .075 0"/></filter>
+  <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="16"/></filter>
+</defs>
+<rect width="800" height="1000" fill="url(#wall)"/>
+<ellipse cx="400" cy="380" rx="528" ry="484" fill="url(#pool)" opacity="0.9"/>
+<rect x="48" y="160" width="704" height="440" rx="17.6" fill="url(#panel)"/>
+<rect x="48" y="160" width="704" height="440" rx="17.6" fill="none" stroke="#F4D696" stroke-opacity=".35" stroke-width="2.6"/>
+<path d="M68 371.2 L68 301.1 Q68 289.8 74.3 283 L74.3 258.1 L80.2 258.1 L80.2 283 Q86.4 289.8 86.4 301.1 L86.4 371.2 Z" fill="#0b0704" fill-opacity="0.9"/>
+<path d="M99.7 371.2 L99.7 281 Q99.7 266.4 108.8 257.7 L108.8 225.7 L117.4 225.7 L117.4 257.7 Q126.5 266.4 126.5 281 L126.5 371.2 Z" fill="#0b0704" fill-opacity="0.8"/>
+<path d="M142.5 371.2 L142.5 277.3 Q142.5 262.1 148.5 253 L148.5 219.7 L154.2 219.7 L154.2 253 Q160.2 262.1 160.2 277.3 L160.2 371.2 Z" fill="#0b0704" fill-opacity="0.8"/>
+<path d="M173.1 371.2 L173.1 282.9 Q173.1 268.6 178.3 260.1 L178.3 228.7 L183.3 228.7 L183.3 260.1 Q188.5 268.6 188.5 282.9 L188.5 371.2 Z" fill="#0b0704" fill-opacity="0.8"/>
+<path d="M197.8 371.2 L197.8 288 Q197.8 274.5 204 266.5 L204 236.9 L209.8 236.9 L209.8 266.5 Q216 274.5 216 288 L216 371.2 Z" fill="#0b0704" fill-opacity="0.8"/>
+<path d="M222.5 371.2 L222.5 295.7 Q222.5 283.5 229.9 276.2 L229.9 249.4 L236.8 249.4 L236.8 276.2 Q244.1 283.5 244.1 295.7 L244.1 371.2 Z" fill="#0b0704" fill-opacity="0.9"/>
+<path d="M262.6 371.2 L262.6 298.3 Q262.6 286.6 271.8 279.5 L271.8 253.6 L280.3 253.6 L280.3 279.5 Q289.5 286.6 289.5 298.3 L289.5 371.2 Z" fill="#0b0704" fill-opacity="0.9"/>
+<path d="M299 371.2 L299 302.5 Q299 291.4 304.3 284.8 L304.3 260.4 L309.2 260.4 L309.2 284.8 Q314.5 291.4 314.5 302.5 L314.5 371.2 Z" fill="#0b0704" fill-opacity="0.9"/>
+<path d="M328.7 371.2 L328.7 302.9 Q328.7 291.9 336.7 285.2 L336.7 261 L344.2 261 L344.2 285.2 Q352.2 291.9 352.2 302.9 L352.2 371.2 Z" fill="#0b0704" fill-opacity="0.8"/>
+<path d="M370.1 371.2 L370.1 313.7 Q370.1 304.5 376.8 298.9 L376.8 278.5 L383 278.5 L383 298.9 Q389.7 304.5 389.7 313.7 L389.7 371.2 Z" fill="#0b0704" fill-opacity="0.9"/>
+<path d="M408.8 371.2 L408.8 293 Q408.8 280.4 414 272.8 L414 245.1 L418.9 245.1 L418.9 272.8 Q424.1 280.4 424.1 293 L424.1 371.2 Z" fill="#0b0704" fill-opacity="0.8"/>
+<path d="M438.7 371.2 L438.7 310.8 Q438.7 301.1 449.4 295.2 L449.4 273.8 L459.5 273.8 L459.5 295.2 Q470.2 301.1 470.2 310.8 L470.2 371.2 Z" fill="#0b0704" fill-opacity="0.8"/>
+<path d="M483.2 371.2 L483.2 287.9 Q483.2 274.5 488.8 266.5 L488.8 236.9 L494.1 236.9 L494.1 266.5 Q499.8 274.5 499.8 287.9 L499.8 371.2 Z" fill="#0b0704" fill-opacity="0.9"/>
+<path d="M518.9 371.2 L518.9 298.3 Q518.9 286.6 524 279.5 L524 253.7 L528.8 253.7 L528.8 279.5 Q534 286.6 534 298.3 L534 371.2 Z" fill="#0b0704" fill-opacity="0.8"/>
+<path d="M541 371.2 L541 296.6 Q541 284.5 549.5 277.3 L549.5 250.8 L557.6 250.8 L557.6 277.3 Q566.1 284.5 566.1 296.6 L566.1 371.2 Z" fill="#0b0704" fill-opacity="0.7"/>
+<path d="M576.6 371.2 L576.6 286.3 Q576.6 272.6 581.7 264.4 L581.7 234.2 L586.4 234.2 L586.4 264.4 Q591.4 272.6 591.4 286.3 L591.4 371.2 Z" fill="#0b0704" fill-opacity="0.8"/>
+<path d="M597.8 371.2 L597.8 298.9 Q597.8 287.2 608.3 280.2 L608.3 254.5 L618.2 254.5 L618.2 280.2 Q628.7 287.2 628.7 298.9 L628.7 371.2 Z" fill="#0b0704" fill-opacity="1"/>
+<path d="M635.7 371.2 L635.7 292.4 Q635.7 279.7 640.6 272 L640.6 244.1 L645.1 244.1 L645.1 272 Q650 279.7 650 292.4 L650 371.2 Z" fill="#0b0704" fill-opacity="0.8"/>
+<path d="M666.1 371.2 L666.1 290.6 Q666.1 277.6 673.4 269.8 L673.4 241.1 L680.4 241.1 L680.4 269.8 Q687.7 277.6 687.7 290.6 L687.7 371.2 Z" fill="#0b0704" fill-opacity="0.9"/>
+<path d="M78 564.8 L78 502.8 Q78 492.8 84.3 486.8 L84.3 464.8 L90.2 464.8 L90.2 486.8 Q96.5 492.8 96.5 502.8 L96.5 564.8 Z" fill="#0b0704" fill-opacity="0.9"/>
+<path d="M114.4 564.8 L114.4 486.5 Q114.4 473.9 123.5 466.3 L123.5 438.6 L132.1 438.6 L132.1 466.3 Q141.2 473.9 141.2 486.5 L141.2 564.8 Z" fill="#0b0704" fill-opacity="0.8"/>
+<path d="M160.6 564.8 L160.6 492.2 Q160.6 480.5 170.2 473.5 L170.2 447.7 L179.2 447.7 L179.2 473.5 Q188.8 480.5 188.8 492.2 L188.8 564.8 Z" fill="#0b0704" fill-opacity="0.8"/>
+<path d="M203.9 564.8 L203.9 495.6 Q203.9 484.5 214 477.8 L214 453.2 L223.5 453.2 L223.5 477.8 Q233.6 484.5 233.6 495.6 L233.6 564.8 Z" fill="#0b0704" fill-opacity="0.8"/>
+<path d="M245.6 564.8 L245.6 475.5 Q245.6 461.1 254.1 452.5 L254.1 420.8 L262.1 420.8 L262.1 452.5 Q270.6 461.1 270.6 475.5 L270.6 564.8 Z" fill="#0b0704" fill-opacity="1"/>
+<path d="M276.9 564.8 L276.9 486.4 Q276.9 473.7 285.6 466.1 L285.6 438.3 L293.7 438.3 L293.7 466.1 Q302.4 473.7 302.4 486.4 L302.4 564.8 Z" fill="#0b0704" fill-opacity="0.9"/>
+<path d="M316 564.8 L316 493 Q316 481.4 325.4 474.4 L325.4 448.9 L334.4 448.9 L334.4 474.4 Q343.8 481.4 343.8 493 L343.8 564.8 Z" fill="#0b0704" fill-opacity="0.8"/>
+<path d="M352 564.8 L352 471.6 Q352 456.5 359.1 447.5 L359.1 414.4 L365.7 414.4 L365.7 447.5 Q372.7 456.5 372.7 471.6 L372.7 564.8 Z" fill="#0b0704" fill-opacity="0.8"/>
+<path d="M392.5 564.8 L392.5 476.3 Q392.5 462 398.4 453.4 L398.4 422 L404.1 422 L404.1 453.4 Q410 462 410 476.3 L410 564.8 Z" fill="#0b0704" fill-opacity="0.9"/>
+<path d="M418.2 564.8 L418.2 489.7 Q418.2 477.6 423.1 470.4 L423.1 443.7 L427.6 443.7 L427.6 470.4 Q432.5 477.6 432.5 489.7 L432.5 564.8 Z" fill="#0b0704" fill-opacity="0.9"/>
+<path d="M442.1 564.8 L442.1 486.3 Q442.1 473.7 450.9 466.1 L450.9 438.2 L459.2 438.2 L459.2 466.1 Q468.1 473.7 468.1 486.3 L468.1 564.8 Z" fill="#0b0704" fill-opacity="0.8"/>
+<path d="M482.8 564.8 L482.8 504.8 Q482.8 495.1 490.1 489.3 L490.1 468 L496.9 468 L496.9 489.3 Q504.2 495.1 504.2 504.8 L504.2 564.8 Z" fill="#0b0704" fill-opacity="0.9"/>
+<path d="M512.6 564.8 L512.6 473.3 Q512.6 458.5 522.4 449.7 L522.4 417.2 L531.7 417.2 L531.7 449.7 Q541.5 458.5 541.5 473.3 L541.5 564.8 Z" fill="#0b0704" fill-opacity="0.8"/>
+<path d="M556.9 564.8 L556.9 490.4 Q556.9 478.4 564.8 471.2 L564.8 444.8 L572.3 444.8 L572.3 471.2 Q580.2 478.4 580.2 490.4 L580.2 564.8 Z" fill="#0b0704" fill-opacity="0.8"/>
+<path d="M597 564.8 L597 486.6 Q597 474 603.6 466.4 L603.6 438.7 L609.8 438.7 L609.8 466.4 Q616.4 474 616.4 486.6 L616.4 564.8 Z" fill="#0b0704" fill-opacity="0.9"/>
+<path d="M624.3 564.8 L624.3 478.6 Q624.3 464.7 634.3 456.4 L634.3 425.8 L643.8 425.8 L643.8 456.4 Q653.9 464.7 653.9 478.6 L653.9 564.8 Z" fill="#0b0704" fill-opacity="0.8"/>
+<path d="M665.8 564.8 L665.8 495.8 Q665.8 484.7 675.8 478 L675.8 453.5 L685.3 453.5 L685.3 478 Q695.3 484.7 695.3 495.8 L695.3 564.8 Z" fill="#0b0704" fill-opacity="0.9"/>
+<line x1="48" y1="371.2" x2="752" y2="371.2" stroke="#F4D696" stroke-opacity=".5" stroke-width="3.3"/>
+<line x1="48" y1="564.8" x2="752" y2="564.8" stroke="#F4D696" stroke-opacity=".5" stroke-width="3.3"/>
+<rect x="0" y="640" width="800" height="100" fill="#0c0805"/>
+<rect x="0" y="640" width="800" height="12" fill="url(#gold)" opacity=".55"/>
+<rect x="0" y="652" width="800" height="50" fill="#FF9A2E" opacity=".06"/>
+<rect width="800" height="1000" fill="url(#vig)"/>
+<rect y="720" width="800" height="280" fill="url(#fade)"/>
+<rect width="800" height="1000" filter="url(#grain)"/>
+<g class="ph-label" text-anchor="middle" font-family="Jost, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="500">
+  <line x1="352" y1="864.2" x2="448" y2="864.2" stroke="#DDB06B" stroke-opacity=".55" stroke-width="2"/>
+  <text x="400" y="916.2" font-size="33.6" letter-spacing="5.4" fill="#F4D696" fill-opacity=".92">THE BACKLIT BAR</text>
+  <text x="400" y="967" font-size="28.9" letter-spacing="5.8" fill="#B98442">PHOTO TO COME</text>
+</g>
+</svg>

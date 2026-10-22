@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" role="img" aria-label="Placeholder: Craft cocktail (photo to come)">
+<style>@media (max-width: 332px) { .ph-label { display: none; } }</style>
+<defs>
+  <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#120d07"/><stop offset=".6" stop-color="#0E0A06"/><stop offset="1" stop-color="#070602"/></linearGradient>
+  <radialGradient id="pool" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FF9A2E" stop-opacity=".55"/><stop offset=".35" stop-color="#874E11" stop-opacity=".32"/><stop offset="1" stop-color="#4C2807" stop-opacity="0"/></radialGradient>
+  <radialGradient id="soft" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#B98442" stop-opacity=".35"/><stop offset="1" stop-color="#4C2807" stop-opacity="0"/></radialGradient>
+  <radialGradient id="dot" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#F4D696" stop-opacity="1"/><stop offset=".25" stop-color="#FF9A2E" stop-opacity=".7"/><stop offset="1" stop-color="#FF9A2E" stop-opacity="0"/></radialGradient>
+  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F4D696"/><stop offset=".5" stop-color="#DDB06B"/><stop offset="1" stop-color="#874E11"/></linearGradient>
+  <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9A2E" stop-opacity=".75"/><stop offset=".55" stop-color="#B98442" stop-opacity=".55"/><stop offset="1" stop-color="#874E11" stop-opacity=".35"/></linearGradient>
+  <linearGradient id="leather" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1a0c"/><stop offset="1" stop-color="#0d0905"/></linearGradient>
+  <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4D696" stop-opacity=".28"/><stop offset="1" stop-color="#FF9A2E" stop-opacity="0"/></linearGradient>
+  <linearGradient id="liquid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4D696" stop-opacity=".9"/><stop offset="1" stop-color="#874E11" stop-opacity=".9"/></linearGradient>
+  <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070602" stop-opacity="0"/><stop offset="1" stop-color="#070602" stop-opacity=".92"/></linearGradient>
+  <radialGradient id="vig" cx=".5" cy=".45" r=".75"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".6"/></radialGradient>
+  <filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" stitchTiles="stitch" seed="7"/><feColorMatrix values="0 0 0 0 1  0 0 0 0 .86  0 0 0 0 .62  0 0 0 .075 0"/></filter>
+  <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="16"/></filter>
+</defs>
+<rect width="800" height="1000" fill="url(#wall)"/>
+<ellipse cx="400" cy="410.4" rx="334.4" ry="288.8" fill="url(#pool)" opacity="0.85"/>
+<path d="M232.8 -136.8 L4.8 775.2 L795.2 775.2 L567.2 -136.8 Z" fill="url(#beam)" opacity=".5"/>
+<path d="M257.1 398.2 Q278.4 474.2 400 474.2 Q521.6 474.2 542.9 398.2 Z" fill="url(#liquid)" opacity=".85"/>
+<ellipse cx="400" cy="398.2" rx="142.9" ry="18.2" fill="#F4D696" opacity=".35"/>
+<path d="M248 380 Q269.3 479.9 400 479.9 Q530.7 479.9 552 380" fill="none" stroke="url(#gold)" stroke-width="4.6"/>
+<ellipse cx="400" cy="380" rx="152" ry="22.8" fill="none" stroke="#F4D696" stroke-opacity=".8" stroke-width="3.8"/>
+<line x1="400" y1="479.9" x2="400" y2="646" stroke="url(#gold)" stroke-width="5.3"/>
+<ellipse cx="400" cy="650.6" rx="76" ry="12.2" fill="none" stroke="#DDB06B" stroke-opacity=".85" stroke-width="4.6"/>
+<circle cx="509.4" cy="367.8" r="30.4" fill="none" stroke="#F4D696" stroke-opacity=".75" stroke-width="3.8"/>
+<path d="M509.4 337.4 L509.4 398.2 M479 367.8 L539.8 367.8" stroke="#F4D696" stroke-opacity=".45" stroke-width="1.8"/>
+<ellipse cx="400" cy="676.4" rx="212.8" ry="18.2" fill="#FF9A2E" opacity=".12"/>
+<rect width="800" height="1000" fill="url(#vig)"/>
+<rect y="720" width="800" height="280" fill="url(#fade)"/>
+<rect width="800" height="1000" filter="url(#grain)"/>
+<g class="ph-label" text-anchor="middle" font-family="Jost, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="500">
+  <line x1="352" y1="864.2" x2="448" y2="864.2" stroke="#DDB06B" stroke-opacity=".55" stroke-width="2"/>
+  <text x="400" y="916.2" font-size="33.6" letter-spacing="5.4" fill="#F4D696" fill-opacity=".92">CRAFT COCKTAIL</text>
+  <text x="400" y="967" font-size="28.9" letter-spacing="5.8" fill="#B98442">PHOTO TO COME</text>
+</g>
+</svg>
