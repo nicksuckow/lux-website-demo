@@ -867,7 +867,8 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
 .field textarea { min-height: 116px; resize: vertical; line-height: 1.5; }
 .field input::placeholder, .field textarea::placeholder { color: rgba(174, 157, 130, .7); }
 .field input:hover, .field select:hover, .field textarea:hover { border-color: rgba(221, 176, 107, .75); }
-.field input:focus, .field select:focus, .field textarea:focus {
+/* :focus-within also covers the date field's own calendar button */
+.field input:focus, .field input:focus-within, .field select:focus, .field textarea:focus {
   outline: 2px solid transparent; outline-offset: 2px; /* invisible normally, a real ring in forced colors */
   border-color: var(--gold);
   background: rgba(7, 6, 2, .85);
@@ -1135,11 +1136,16 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
   .panel__grid { grid-template-columns: minmax(0, 1fr); }
   .panel__photo { display: none; }
   .carte { max-width: 900px; margin-inline: auto; width: 100%; }
-  .gallery__grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
-  .gallery__grid li { grid-column: span 2; }
-  .gallery__grid li:nth-child(7) { grid-column: 2 / span 2; } /* 8 tiles: centre the last row of two */
+  .gallery__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
   .gallery__grid li:nth-child(even) { transform: none; }
   .gallery__grid li:nth-child(3n+2) { transform: translateY(44px); }
+}
+/* Tablets and small laptops: 3-up on six tracks, so the 8th row is a centred pair
+   (both dropped like the middle column) instead of two tiles and an empty cell */
+@media (min-width: 761px) and (max-width: 1180px) {
+  .gallery__grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+  .gallery__grid li { grid-column: span 2; }
+  .gallery__grid li:nth-child(7) { grid-column: 2 / span 2; transform: translateY(44px); }
 }
 
 /* Portrait tablets: the sign scales up to fill the wall (still <= 600 CSS px for 2x sharpness) */
@@ -1211,7 +1217,6 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
   .form__actions .btn { flex: 1 1 100%; }
 
   .gallery__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; padding-bottom: 32px; }
-  .gallery__grid li, .gallery__grid li:nth-child(7) { grid-column: auto; }
   .gallery__grid li:nth-child(3n+2) { transform: none; }
   .gallery__grid li:nth-child(even) { transform: translateY(32px); }
   .gallery__item .arch { outline-offset: 5px; }
@@ -1283,7 +1288,9 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
 }
 @media (max-width: 400px) {
   .hero__where { letter-spacing: .2em; }
-  .hero__status { max-width: 100%; white-space: normal; text-wrap: balance; text-align: center; line-height: 1.35; padding-block: .5em; letter-spacing: .07em; border-radius: 22px; }
+  /* if it wraps, the dot leads the first centred line */
+  .hero__status { display: inline-block; max-width: 100%; white-space: normal; text-wrap: balance; text-align: center; line-height: 1.35; padding-block: .78em; letter-spacing: .07em; border-radius: 22px; }
+  .hero__status .status-dot { display: inline-block; margin-right: .4em; vertical-align: .08em; } /* + the space = the old gap */
 }
 @media (max-width: 359px) {
   /* 320px (WCAG reflow): the Today mark drops under the day so the hours table fits */
