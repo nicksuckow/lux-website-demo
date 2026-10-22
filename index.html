@@ -8,7 +8,7 @@
 <meta name="theme-color" content="#070602">
 <meta name="color-scheme" content="dark">
 
-<!-- Social cards. TODO at launch: make these image URLs absolute (https://<domain>/assets/og-image.jpg) and add a canonical link (see CONTENT-TODO.md) -->
+<!-- Social cards. TODO before sharing any link (demo or live): make these image URLs absolute for that address, and add og:url + a canonical link (CONTENT-TODO.md section 7) -->
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="LUX Waukee">
 <meta property="og:title" content="LUX | Asian Restaurant &amp; Bar in Waukee, IA">
@@ -29,7 +29,9 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Jost:wght@300..600&amp;display=swap">
+<!-- Fonts load without blocking the first paint (display=swap); the <noscript> copy covers no-JS visitors -->
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Jost:wght@300..600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&amp;family=Jost:wght@300..600&amp;display=swap"></noscript>
 <link rel="preload" as="image" href="assets/lux-logo-gold-full.webp" imagesrcset="assets/lux-logo-gold-600.webp 600w, assets/lux-logo-gold-full.webp 1164w" imagesizes="(max-width: 590px) 260px, (min-width: 600px) and (max-aspect-ratio: 4/5) 62vw, (max-width: 1340px) 44vw, 590px" type="image/webp">
 <link rel="stylesheet" href="css/styles.css">
 
@@ -221,18 +223,18 @@
       <p class="section-head__intro">A first taste of the kitchen and the bar, from separate lunch and dinner menus. The full menus are coming to this page soon.</p>
     </header>
 
-    <div class="menu__tabs" role="tablist" aria-label="Menus">
-      <button class="tab" role="tab" id="tab-lunch" aria-controls="panel-lunch" aria-selected="false" tabindex="-1" type="button" data-service="Lunch">
+    <div class="menu__tabs" data-tablist>
+      <button class="tab" id="tab-lunch" aria-controls="panel-lunch" type="button" data-service="Lunch">
         <span class="tab__badge" data-now-badge hidden>Now serving</span>
         <span class="tab__name">Lunch</span>
         <span class="tab__meta"><span class="tab__meta-long" data-tab-hours="Lunch">Daily · 10:30–2:30</span><span class="tab__meta-short" data-tab-hours-short="Lunch">10:30–2:30</span></span>
       </button>
-      <button class="tab" role="tab" id="tab-dinner" aria-controls="panel-dinner" aria-selected="true" tabindex="0" type="button" data-service="Dinner">
+      <button class="tab" id="tab-dinner" aria-controls="panel-dinner" type="button" data-service="Dinner">
         <span class="tab__badge" data-now-badge hidden>Now serving</span>
         <span class="tab__name">Dinner</span>
         <span class="tab__meta"><span class="tab__meta-long" data-tab-hours="Dinner">Nightly from 4:30</span><span class="tab__meta-short" data-tab-hours-short="Dinner">From 4:30</span></span>
       </button>
-      <button class="tab" role="tab" id="tab-drinks" aria-controls="panel-drinks" aria-selected="false" tabindex="-1" type="button">
+      <button class="tab" id="tab-drinks" aria-controls="panel-drinks" type="button">
         <span class="tab__name">Drinks</span>
         <span class="tab__meta"><span class="tab__meta-long">Craft cocktails</span><span class="tab__meta-short">Cocktails</span></span>
       </button>
@@ -268,7 +270,7 @@
         </div>
       </div>
 
-      <!-- DINNER (selected in the HTML; JS opens the tab for the service being served or coming next) -->
+      <!-- DINNER (the one card not hidden in the HTML; JS opens the tab for the service being served or coming next) -->
       <div class="panel" id="panel-dinner">
         <div class="panel__grid">
           <article class="carte" aria-labelledby="carte-dinner">

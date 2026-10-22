@@ -498,17 +498,23 @@
      6. Menu tabs (WAI-ARIA tabs, automatic activation), service-aware
   ------------------------------------------------------------------ */
   function initTabs() {
-    var list = $('[role="tablist"]');
+    var list = $('[data-tablist]');
     if (!list) return;
-    var tabs = $$('[role="tab"]', list);
+    var tabs = $$('.tab', list);
     var glow = $('.menu__tabs-glow', list);
-    // panels are plain containers in the HTML; they become tab panels only when the tabs work
+    // The HTML holds plain buttons and cards (the tab row is hidden without JS);
+    // the tab roles are added here, once the tabs actually work.
+    list.setAttribute('role', 'tablist');
+    list.setAttribute('aria-label', 'Menus');
+    var initial = null;
     tabs.forEach(function (t) {
+      t.setAttribute('role', 'tab');
       var p = doc.getElementById(t.getAttribute('aria-controls'));
       if (!p) return;
       p.setAttribute('role', 'tabpanel');
       p.setAttribute('aria-labelledby', t.id);
       p.tabIndex = 0;
+      if (!initial && !p.hidden) initial = t; // the card the HTML shows (Dinner)
     });
 
     function moveGlow(tab) {
@@ -547,7 +553,7 @@
     // open on the service being served or coming next (without JS every card shows)
     var want = SERVICES.length ? defaultServiceTab(localNow()) : null;
     var start = want && tabs.filter(function (t) { return t.getAttribute('data-service') === want; })[0];
-    select(start || selected(), false, false);
+    select(start || initial || tabs[0], false, false);
 
     window.addEventListener('resize', function () { moveGlow(selected()); });
     if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(function () { moveGlow(selected()); });

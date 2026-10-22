@@ -14,7 +14,7 @@ from local press the owner should confirm, with the exact file and line to edit.
 
 Header with a live open/closed status (Central time) · hero with the halo-lit sign and the hours strip ·
 press strip · menu highlights on printed-style cards (Lunch / Dinner / Drinks, opening on the service
-being served) · Reserve and Order panels · About · private events inquiry form · gallery with a
+being served or coming next) · Reserve and Order panels · About · private events inquiry form · gallery with a
 keyboard-accessible lightbox · Visit (address, directions, hours table, map on request) · footer.
 On phones a quick-action dock (Call · Reserve · Order · Directions) appears once you scroll past the hero.
 
@@ -47,15 +47,16 @@ CONTENT-TODO.md     what to confirm or supply, and where
 
 ### Hours
 Edit the `services` list in **`js/config.js`**. It drives the live status ("Open now · Lunch until
-2:30 PM", "Last call…", "Back at 4:30 PM for dinner"…), the hours table, the footer, the hero strip and
-the menu tabs. To close a day, leave that day out of every service. Then update the two hand-kept copies:
-the JSON-LD hours in `index.html` (for Google) and the static fallback text. CONTENT-TODO.md section 3
-lists the lines.
+2:30 PM", "Closing soon…" in a service's last 30 minutes, "Back at 4:30 PM for dinner"…), the hours table,
+the footer, the hero strip and the menu tabs. To close a day, leave that day out of every service. Then
+update the two hand-kept copies: the JSON-LD hours in `index.html` (for Google) and the static fallback
+text. CONTENT-TODO.md section 3 lists the lines.
 
 ### Reservation, ordering and events-form links
 Fill in `reserveUrl`, `orderUrl` and `eventsFormEndpoint` in **`js/config.js`**. Until then, Reserve and
-Order fall back to calling the restaurant, and the events form hands guests a pre-filled email
-("Almost there…") instead of claiming it was sent. CONTENT-TODO.md has a 3-step Formspree setup.
+Order fall back to calling the restaurant (the Reserve/Order panel text switches to booking/ordering online
+once a link is set), and the events form hands guests a pre-filled email ("Almost there…") instead of
+claiming it was sent. CONTENT-TODO.md has a 3-step Formspree setup.
 
 ### Menu
 The menu cards live in `index.html` (search for `MENU`). Each dish is one `<li class="dish">` block;
@@ -81,12 +82,22 @@ Any static host works. Upload or point it at this folder's contents (the folder 
   private**, and GitHub Pages for private repos needs a paid plan (Pro, Team or Enterprise); otherwise make
   the repo public first. The site works under the `https://<user>.github.io/<repo>/` sub-path as is.
 
-After pointing the domain (likely luxwaukee.com) at the host, finish the launch items in
-CONTENT-TODO.md section 7: absolute social-card image URLs and a canonical link.
+**Before sharing any link to the site (the demo link too),** make the social-card URLs absolute for that
+address (CONTENT-TODO.md section 7). Every URL in the site is relative so it runs on any host, but link
+previews need an absolute image URL. Redo it, with a canonical link, once the domain (likely
+luxwaukee.com) points at the host.
 
 ## Notes for developers
 
-- Without JavaScript the page is complete: the nav stays visible, all three menu cards show in turn and
-  nothing is hidden behind animations.
+- Without JavaScript the page is complete: the nav stays visible, all three menu cards show in turn (the
+  tab roles are added by JS), the events form uses the browser's own validation and posts to a mailto:
+  address, and nothing is hidden behind animations.
 - Motion respects `prefers-reduced-motion`; the sign's flicker plays once per browser session.
 - Light effects run on IntersectionObserver, never on scroll events.
+- Header breakpoints are in `em` (60em = 960px at the default text size), so visitors who set a larger
+  default font get the compact menu-button header instead of buttons pushed off-screen. `js/main.js` uses
+  the same `60em` query for the mobile menu.
+- The logo has a 600px WebP (`assets/lux-logo-gold-600.webp`) for phones; its `sizes` attribute (on both
+  `<source>`s and the preload in `<head>`) mirrors the `.sign` width in the CSS, so update both together.
+- Google Fonts load without blocking the first paint (`rel="preload"` + `onload`, with a `<noscript>`
+  copy).
