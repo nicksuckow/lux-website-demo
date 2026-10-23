@@ -3,6 +3,8 @@
 The website for **LUX**, a modern Asian fusion restaurant and craft cocktail bar at
 3150 Grand Prairie Pkwy, Suite 150, in Waukee, Iowa.
 
+**Live:** <https://nicksuckow.github.io/lux-website-demo/> (deployed from `main` by GitHub Pages)
+
 It's a plain static site: one HTML page, one stylesheet, two small scripts and the images. There are
 no frameworks, no build step and no external scripts (only Google Fonts), and every URL is relative, so it
 runs on any static host, including in a sub-folder.
