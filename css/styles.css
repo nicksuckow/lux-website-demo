@@ -1,9 +1,25 @@
 /* ==========================================================================
    LUX Waukee: Afterglow
    Cinematic, nighttime cocktail-lounge direction. Lux = light.
-   Black + warm brushed gold. Type echoes the logo's tagline: Fahkwang wide caps for headings
-   and labels, Rosario (warm humanist) for reading and the menu.
+   Black + warm brushed gold. Type echoes the logo's tagline "ASIAN RESTAURANT & BAR":
+   Fahkwang (400, 500) in wide tracked caps for headlines, menu tabs, card titles, buttons and labels;
+   Rosario (400, 500, italic 400) for reading text, dish names and notes, and for the figures people
+   read or dial (prices, the menu cards' hours, phone numbers), since Fahkwang only has fixed-width
+   digits. Lining figures are forced once, in the base rules.
+   Both from Google Fonts (index.html), both with the Vietnamese subset (Phở, Bún Bò Huế).
    ========================================================================== */
+
+/* Fallback for the caps face while Fahkwang loads: Arial scaled to Fahkwang's width and line
+   metrics (ascent 100.8%, descent 29.2%, both divided by the 111% size-adjust), so the header
+   buttons do not resize when the web font swaps in. */
+@font-face {
+  font-family: 'Fahkwang fallback';
+  src: local('Arial'), local('ArialMT'), local('Helvetica Neue'), local('Liberation Sans');
+  size-adjust: 111%;
+  ascent-override: 91%;
+  descent-override: 26%;
+  line-gap-override: 0%;
+}
 
 :root {
   /* Palette (sampled from the logo + the halo-lit sign) */
@@ -27,11 +43,13 @@
 
   /* --caps: wide, tracked capitals, like "ASIAN RESTAURANT & BAR" under the script logo.
      --sans: warm humanist text face for reading, dish names and notes. */
-  --caps: 'Fahkwang', 'Avenir Next', 'Century Gothic', 'Helvetica Neue', Arial, sans-serif;
+  --caps: 'Fahkwang', 'Fahkwang fallback', 'Avenir Next', 'Century Gothic', 'Helvetica Neue', Arial, sans-serif;
   --sans: 'Rosario', 'Gill Sans', 'Segoe UI', Candara, 'Trebuchet MS', sans-serif;
 
   /* One type floor for every small tracked-caps label: never under 12px */
   --fs-label: .75rem;
+  /* One size for the card-level titles (menu card, Reserve/Order, form success), a clear step below .display */
+  --fs-h3: clamp(1.3rem, 1.05rem + .9vw, 1.8rem);
 
   /* One spacing scale */
   --gutter: clamp(20px, 5vw, 64px);
@@ -51,6 +69,12 @@
 
 /* ---------- Reset / base ---------- */
 *, *::before, *::after { box-sizing: border-box; }
+/* Lining figures everywhere. Rosario's default digits are oldstyle, and every `font:` shorthand
+   resets both font-variant-numeric and font-feature-settings to normal, so inheriting from body is
+   not enough: this is forced on every element, and new rules need nothing extra. (Fahkwang has no
+   lnum feature; its figures are already lining.) For other OpenType features use the font-variant-*
+   longhands, e.g. `font-variant-numeric: tabular-nums`: they still apply on top of this. */
+*, *::before, *::after { font-feature-settings: 'lnum' 1 !important; }
 [hidden] { display: none !important; }
 html {
   background: var(--wall);
@@ -66,7 +90,6 @@ body {
   font-weight: 400;
   font-size: clamp(1rem, .96rem + .2vw, 1.0625rem);
   line-height: 1.65;
-  font-variant-numeric: lining-nums;
   overflow-x: hidden;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -608,7 +631,7 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
 }
 .tab:first-child { padding-left: 0; }
 .tab__name { font: 400 clamp(1.05rem, .92rem + .5vw, 1.36rem)/1.1 var(--caps); letter-spacing: .2em; text-transform: uppercase; transition: color .35s, text-shadow .5s; }
-.tab__meta { font: 400 .9rem/1.2 var(--sans); letter-spacing: .01em; color: var(--muted); font-variant-numeric: lining-nums; }
+.tab__meta { font: 400 .9rem/1.2 var(--sans); letter-spacing: .01em; color: var(--muted); }
 .tab__meta-short { display: none; }
 .tab__badge {
   position: absolute; top: 4px; left: clamp(14px, 2.6vw, 34px);
@@ -669,11 +692,12 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
 }
 .carte__mark { width: 74px; height: auto; aspect-ratio: 1146 / 591; margin: 0 auto 12px; fill: url(#goldfill); filter: drop-shadow(0 0 8px rgba(255, 154, 46, .3)); }
-.carte__title { font: 400 clamp(1.55rem, 1.3rem + 1.1vw, 2.2rem)/1.15 var(--caps); letter-spacing: .26em; padding-left: .26em; text-transform: uppercase; color: var(--cream); }
+.carte__title { font: 400 var(--fs-h3)/1.15 var(--caps); letter-spacing: .22em; padding-left: .22em; text-transform: uppercase; color: var(--cream); }
 .carte__hours {
   display: flex; flex-wrap: wrap; justify-content: center; gap: 4px 0;
   margin: 14px 0 0;
-  font: 500 var(--fs-label)/1.6 var(--caps); letter-spacing: .16em; text-transform: uppercase; color: var(--gold);
+  /* Rosario caps, not Fahkwang: the hours need proportional figures ("11:00", not "1 1:00") */
+  font: 500 var(--fs-label)/1.6 var(--sans); letter-spacing: .1em; text-transform: uppercase; color: var(--gold);
 }
 .carte__hours span + span::before { content: '·'; margin: 0 .8em; color: var(--amber); }
 .carte__col { display: grid; gap: 40px; align-content: start; }
@@ -682,11 +706,13 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
   display: flex; align-items: baseline; gap: 12px;
   margin: 0 0 18px;
   font: 500 var(--fs-label)/1.2 var(--caps); letter-spacing: .22em; text-transform: uppercase; color: var(--gold);
+  text-wrap: balance;
 }
 .course__title::after { content: ''; flex: 1; height: 1px; align-self: center; background: linear-gradient(90deg, var(--line-strong), transparent); }
-.course__no { font: 400 1em/1 var(--caps); letter-spacing: .06em; color: var(--amber); white-space: nowrap; }
+/* a fixed, right-aligned box: the dots line up and every course name starts at the same x */
+.course__no { display: inline-block; min-width: 2.45rem; text-align: right; font: 400 1em/1 var(--caps); letter-spacing: .06em; color: var(--amber); white-space: nowrap; }
 .course__no::after { content: '\00B7'; margin-left: .75em; }
-.course__lede { margin: 0; font: italic 400 clamp(1.1rem, 1.02rem + .3vw, 1.25rem)/1.5 var(--sans); color: var(--cream); text-wrap: pretty; }
+.course__lede { margin: 0; font: italic 400 clamp(1.1rem, 1.02rem + .3vw, 1.25rem)/1.5 var(--sans); color: var(--cream); text-wrap: balance; }
 .dishes { list-style: none; margin: 0; padding: 0; display: grid; gap: 16px; }
 .dish__line {
   display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: .5em;
@@ -715,9 +741,9 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
 .dish__price {
   text-align: right;
   font: 500 clamp(1.06rem, 1.02rem + .2vw, 1.15rem)/1.32 var(--sans); color: var(--gold-hi);
-  font-variant-numeric: lining-nums tabular-nums; font-feature-settings: 'lnum' 1, 'tnum' 1;
+  font-variant-numeric: lining-nums tabular-nums;
 }
-.dish__note { margin: 3px 0 0; font: italic 400 .95rem/1.45 var(--sans); color: var(--muted); }
+.dish__note { margin: 3px 0 0; font: italic 400 .95rem/1.45 var(--sans); color: var(--muted); text-wrap: balance; }
 .tag {
   display: inline-block; padding: .5em .9em;
   border: 1px solid rgba(221, 176, 107, .45); border-radius: 999px;
@@ -748,7 +774,7 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
 .carte--full .course__title { font-size: .8125rem; letter-spacing: .2em; }
 .carte--full .dishes { gap: 15px; }
 
-/* Chef's Picks: gold italic, as on the printed card */
+/* Chef's Picks: picked out in brighter gold and a touch larger, as the printed card sets it apart */
 .carte--full .course--picks .course__title {
   font-size: .875rem; letter-spacing: .24em; color: var(--gold-hi);
   text-shadow: 0 0 18px rgba(255, 154, 46, .32);
@@ -760,7 +786,9 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
 
 /* Names printed in gold on the card */
 .dish--featured > .dish__line .dish__name { color: var(--gold); }
-.dish__name--italic { font-style: italic; }
+/* italic 400: the only italic weight loaded (an italic 500 would make Google serve the ~2x larger variable
+   italic files, for one dish name whose ink differs by ~3%) */
+.dish__name--italic { font-style: italic; font-weight: 400; }
 /* (P) contains peanuts: a circled P after the name; the words are in visually hidden text */
 .pn {
   display: inline-block; width: .66em; height: .66em; margin-left: .3em; vertical-align: -.02em;
@@ -775,7 +803,7 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
 }
 .dish__opt .dish__name, .dish__opt .dish__price { font-size: 1em; line-height: 1.32; }
 .dish__opt .dish__name { color: var(--cream-2); }
-.dish__size { color: var(--muted); font-size: .9em; white-space: nowrap; font-variant-numeric: lining-nums; font-feature-settings: 'lnum' 1; }
+.dish__size { color: var(--muted); font-size: .9em; white-space: nowrap; }
 /* Sides: a compact name ... price list, two columns when there is room */
 .course--sides { container-type: inline-size; }
 .dishes--compact { display: block; columns: 1; column-gap: clamp(28px, 3.4vw, 44px); }
@@ -870,9 +898,9 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
   .panel--dinner { --index-h: 0px; }
 }
 @media (max-width: 560px) {
-  /* the kicker drops under the heading, aligned with its words */
+  /* the kicker drops under the heading, aligned with its words (numeral box + the title's 12px gap) */
   .course__head { flex-direction: column; align-items: stretch; }
-  .course__kicker { padding-left: 0; }
+  .course__kicker { padding-left: calc(2.45rem + 12px); }
 }
 
 .menu__foot {
@@ -911,10 +939,11 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
 .is-lit .portal__glow { opacity: .9; }
 .portal:hover .portal__glow { opacity: 1; transform: translateX(-50%) scale(1.06); }
 .portal__kicker { font: 500 var(--fs-label)/1 var(--caps); letter-spacing: .24em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.1rem; }
-.portal__title { font: 400 clamp(1.3rem, 1.05rem + .9vw, 1.8rem)/1.25 var(--caps); letter-spacing: .14em; text-transform: uppercase; color: var(--cream); margin-bottom: .6em; }
-.portal__text { color: var(--cream-2); max-width: 32ch; margin-bottom: 1.6rem; }
+.portal__title { font: 400 var(--fs-h3)/1.25 var(--caps); letter-spacing: .14em; text-transform: uppercase; color: var(--cream); margin-bottom: .6em; text-wrap: balance; }
+.portal__text { color: var(--cream-2); max-width: 32ch; margin-bottom: 1.6rem; flex-grow: 1; } /* side by side, both buttons line up even when one text runs a line longer */
 .portal__alt { margin: 1rem 0 0; }
-.portal__alt a { font: 400 1.1rem/1 var(--caps); color: var(--gold-hi); text-decoration: none; letter-spacing: .1em; }
+/* phone numbers are set in Rosario everywhere: proportional figures, no gaps around the 1s */
+.portal__alt a { font: 500 1.15rem/1 var(--sans); color: var(--gold-hi); text-decoration: none; letter-spacing: .01em; }
 .portal__alt a:hover { text-decoration: underline; }
 .js .portal.reveal:nth-child(2) { transition-delay: .12s; }
 
@@ -1056,7 +1085,7 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
   fill: url(#goldfill); filter: drop-shadow(0 0 18px rgba(255, 154, 46, .4));
 }
 .js .form-success:not([hidden]) .form-success__mark { animation: fade .9s var(--ease) both; }
-.form-success__title { font: 400 clamp(1.3rem, 1.1rem + .8vw, 1.75rem)/1.25 var(--caps); letter-spacing: .14em; text-transform: uppercase; margin-bottom: .45em; color: var(--cream); }
+.form-success__title { font: 400 var(--fs-h3)/1.25 var(--caps); letter-spacing: .14em; text-transform: uppercase; margin-bottom: .45em; color: var(--cream); }
 .form-success__title:focus { outline: none; }
 .form-success__text { color: var(--cream-2); max-width: 42ch; margin-inline: auto; text-wrap: pretty; }
 .form-success__summary {
@@ -1066,8 +1095,9 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
   border-top: 1px solid var(--line);
 }
 .form-success__summary dt, .form-success__summary dd { padding: 11px 0; border-bottom: 1px solid var(--line); margin: 0; }
-.form-success__summary dt { font: 500 var(--fs-label)/1.5 var(--caps); letter-spacing: .17em; text-transform: uppercase; color: var(--amber); padding-top: 13px; padding-right: 20px; }
-.form-success__summary dd { color: var(--cream); font-variant-numeric: lining-nums tabular-nums; overflow-wrap: anywhere; }
+/* padding-top 18px puts the small caps label on the baseline of its value */
+.form-success__summary dt { font: 500 var(--fs-label)/1.5 var(--caps); letter-spacing: .12em; text-transform: uppercase; color: var(--amber); padding-top: 18px; padding-right: 14px; }
+.form-success__summary dd { color: var(--cream); font-variant-numeric: lining-nums tabular-nums; overflow-wrap: anywhere; text-wrap: balance; }
 .form-success__actions { display: flex; flex-direction: column; align-items: center; gap: 10px; margin-top: 28px; }
 .form-success__small { margin: 18px 0 0; font-size: .92rem; color: var(--muted); }
 
@@ -1156,6 +1186,7 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
 .visit__addr > span { font: 400 clamp(1.2rem, 1.08rem + .5vw, 1.45rem)/1.35 var(--sans); color: var(--cream); }
 .visit__addr .visit__area { margin-top: 12px; font: 500 var(--fs-label)/1.5 var(--caps); letter-spacing: .2em; text-transform: uppercase; color: var(--amber); }
 .visit__actions { display: flex; flex-wrap: wrap; gap: 12px; }
+.visit__actions a[href^="tel:"] { font-family: var(--sans); font-size: .95rem; letter-spacing: .03em; text-transform: none; } /* the number in Rosario, like every phone number */
 .visit__email { margin: 18px 0 0; }
 .visit__email a { font: italic 400 1.1rem/1.3 var(--sans); color: var(--gold-hi); }
 
@@ -1207,7 +1238,7 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
 }
 .map__pin::after { content: ''; position: absolute; inset: 7px; border-radius: 50%; background: #1b1007; }
 .map__label { text-align: center; font: 400 1.35rem/1.1 var(--caps); letter-spacing: .3em; padding-left: .3em; color: var(--gold-hi); }
-.map__label small { display: block; margin-top: 8px; font: 500 var(--fs-label)/1.4 var(--caps); letter-spacing: .17em; text-transform: uppercase; color: var(--cream-2); }
+.map__label small { display: block; margin-top: 8px; font: 500 var(--fs-label)/1.4 var(--caps); letter-spacing: .17em; text-transform: uppercase; color: var(--cream-2); text-wrap: balance; }
 .map__load { margin-top: 6px; }
 .js .map__open { display: none; }
 .no-js .map__load { display: none; }
@@ -1252,7 +1283,7 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
 .js .footer__sign.is-lit .footer__mark { filter: drop-shadow(0 0 2px rgba(255, 176, 90, .95)) drop-shadow(0 0 12px rgba(255, 154, 46, .75)) drop-shadow(0 0 34px rgba(255, 140, 30, .45)); }
 .js .footer__sign.is-lit .footer__mark { animation: footer-flicker 1.3s linear both; }
 @keyframes footer-flicker { 0% { opacity: .35; } 10% { opacity: 1; } 15% { opacity: .55; } 22%, 100% { opacity: 1; } }
-.footer__tag { font: 500 var(--fs-label)/1 var(--caps); letter-spacing: .34em; text-transform: uppercase; color: var(--gold); padding-left: .34em; }
+.footer__tag { font: 500 var(--fs-label)/1 var(--caps); letter-spacing: .34em; text-transform: uppercase; color: var(--gold); padding-left: .34em; text-wrap: balance; }
 .footer__latin { margin: 16px 0 0; font: italic 400 1.06rem/1.4 var(--sans); color: var(--muted); }
 .footer__latin em { color: var(--gold-hi); }
 .footer__cols {
@@ -1286,11 +1317,6 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
 
 /* Mobile quick-action dock: phones only */
 .dock { display: none; }
-
-/* Rosario's default figures are oldstyle. The font shorthand above resets what body sets,
-   so addresses, phone numbers and dish counts like "(4)" get lining figures here. */
-.mobile-menu__info a, .dish__name, .dish__note, .course__lede, .carte__soon, .menu__foot p,
-.visit__addr > span, .hours__table tbody th, .form__alt, .field__hint { font-variant-numeric: lining-nums; }
 
 /* ==========================================================================
    Responsive
@@ -1331,6 +1357,8 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
   .events__copy { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 250px); column-gap: clamp(28px, 5vw, 48px); align-items: start; }
   .events__copy > * { grid-column: 1; }
   .events__copy .events__photo { grid-column: 2; grid-row: 1 / span 4; align-self: center; margin: 0; max-width: none; }
+  /* side-by-side cards are narrow here: both titles stay on one line */
+  .portal__title { font-size: clamp(1.1rem, .85rem + 1vw, 1.45rem); letter-spacing: .1em; }
 }
 
 @media (max-width: 760px) {
@@ -1343,7 +1371,9 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
   .hero__ctas { width: 100%; max-width: 340px; gap: 12px; }
   .hero__ctas .btn { flex: 1 1 100%; }
   .hero__menu-link { margin-top: 2px; }
-  .hero__status { display: inline-flex; margin-top: 14px; min-height: 36px; letter-spacing: .12em; }
+  /* today's status reads as a sentence on phones, like the dock, the Visit status and the mobile menu:
+     the wide caps would break "Closed · Opens tomorrow at 10:30 AM" onto two lines */
+  .hero__status { display: inline-flex; margin-top: 14px; min-height: 36px; font: 400 .92rem/1 var(--sans); letter-spacing: .01em; text-transform: none; }
   .hours-strip { flex-direction: column; align-items: center; gap: 7px; padding: 14px 0 18px; font-size: .92rem; }
 
   .trust__list { flex-direction: column; gap: 6px; padding: 16px 0 18px; font-size: .9rem; }
@@ -1360,7 +1390,7 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
   .carte { padding: 34px 18px 28px; }
   .carte::before { inset: 5px; }
   .carte__grid, .carte__col { gap: 34px; }
-  .carte__hours { flex-direction: column; align-items: center; letter-spacing: .14em; }
+  .carte__hours { flex-direction: column; align-items: center; }
   .carte__hours span + span::before { display: none; }
 
   .book__grid { grid-template-columns: minmax(0, 1fr); gap: 18px; }
@@ -1451,12 +1481,14 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
 @media (max-width: 400px) {
   .hero__where { letter-spacing: .13em; }
   /* if it wraps, the dot leads the first centred line */
-  .hero__status { display: inline-block; max-width: 100%; white-space: normal; text-wrap: balance; text-align: center; line-height: 1.35; padding-block: .78em; letter-spacing: .07em; border-radius: 22px; }
+  .hero__status { display: inline-block; max-width: 100%; white-space: normal; text-wrap: balance; text-align: center; line-height: 1.35; padding-block: .62em; border-radius: 22px; }
   .hero__status .status-dot { display: inline-block; margin-right: .4em; vertical-align: .08em; } /* + the space = the old gap */
 }
 @media (max-width: 359px) {
   /* 320px (WCAG reflow): the Today mark drops under the day so the hours table fits */
   .today-mark { display: block; width: fit-content; margin: .4em 0 0; }
+  .map__load { letter-spacing: .1em; padding-inline: 1.25em; } /* "Show interactive map" stays on one line */
+  .course__kicker { letter-spacing: .12em; } /* "Choice of two sides" stays on one line beside the numeral indent */
 }
 @media (max-width: 370px) {
   .tab__badge, .tab:first-child .tab__badge { letter-spacing: .04em; }
