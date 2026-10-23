@@ -1,0 +1,70 @@
+# Publishes the site to GitHub Pages on every push to main.
+# One-time setup: Settings → Pages → Build and deployment → Source: "GitHub Actions".
+name: Deploy site to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Let an in-progress deploy finish; queue the next one behind it.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+
+      - id: pages
+        uses: actions/configure-pages@v5
+
+      # Only the public site goes out (not README.md / CONTENT-TODO.md).
+      # Link previews and search engines need absolute URLs, so fill them in for the
+      # address Pages serves (this follows a custom domain automatically once one is set).
+      - name: Assemble the public site
+        env:
+          BASE_URL: ${{ steps.pages.outputs.base_url }}
+        run: |
+          BASE="${BASE_URL%/}"
+          mkdir -p _site
+          cp -r index.html css js assets _site/
+          sed -i \
+            -e "s|content=\"assets/|content=\"$BASE/assets/|g" \
+            -e "/\"image\":\|\"logo\":/ s|\"assets/|\"$BASE/assets/|g" \
+            -e "s|\"hasMenu\": \"#menu\"|\"url\": \"$BASE/\",\n  \"hasMenu\": \"$BASE/#menu\"|" \
+            -e "s|<meta property=\"og:type\" content=\"website\">|&\n<meta property=\"og:url\" content=\"$BASE/\">\n<link rel=\"canonical\" href=\"$BASE/\">|" \
+            _site/index.html
+
+      - name: Check the published page
+        run: |
+          python3 - <<'PY'
+          import json, re
+          html = open('_site/index.html', encoding='utf-8').read()
+          ld = re.search(r'<script type="application/ld\+json">(.*?)</script>', html, re.S)
+          json.loads(ld.group(1))  # fail the deploy rather than publish broken structured data
+          for needle in ('property="og:url"', 'rel="canonical"'):
+              if needle not in html:
+                  print(f'::warning::{needle} was not added; check the sed patterns in pages.yml')
+          if 'content="assets/' in html:
+              print('::warning::a social-card URL is still relative; check the sed patterns in pages.yml')
+          PY
+
+      - uses: actions/upload-pages-artifact@v5
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

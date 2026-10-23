@@ -106,14 +106,18 @@ Any static host works. Upload or point it at this folder's contents (the folder 
   set the publish directory to the repo root. Pushes to the main branch then redeploy automatically.
 - **Cloudflare Pages:** *Workers & Pages → Create → Pages → Connect to Git*, pick this repo, framework
   preset **None**, build command empty, output directory `/`. (Or use *Upload assets* to drag the folder.)
-- **GitHub Pages:** *Settings → Pages → Deploy from a branch → main / (root)*. Note that **this repo is
-  private**, and GitHub Pages for private repos needs a paid plan (Pro, Team or Enterprise); otherwise make
-  the repo public first. The site works under the `https://<user>.github.io/<repo>/` sub-path as is.
+- **GitHub Pages (set up in this repo):** `.github/workflows/pages.yml` publishes the site on every push
+  to `main`. It ships only `index.html`, `css/`, `js/` and `assets/`, and fills in the absolute URLs that
+  link previews need (og:image, og:url, canonical, JSON-LD). One-time setup: *Settings → Pages → Build and
+  deployment → Source: **GitHub Actions***, then re-run the latest "Deploy site to GitHub Pages" run under
+  *Actions* (or push again). The site will be at <https://nicksuckow.github.io/lux-website-demo/>. Note that
+  **this repo is private**, and GitHub Pages for private repos needs a paid plan (Pro, Team or Enterprise);
+  on the free plan, make the repo public first. A custom domain (e.g. luxwaukee.com) can be added under
+  *Settings → Pages*, and the workflow then uses it automatically.
 
-**Before sharing any link to the site (the demo link too),** make the social-card URLs absolute for that
-address (CONTENT-TODO.md section 7). Every URL in the site is relative so it runs on any host, but link
-previews need an absolute image URL. Redo it, with a canonical link, once the domain (likely
-luxwaukee.com) points at the host.
+**On hosts other than GitHub Pages,** make the social-card URLs absolute for that address before sharing a
+link (CONTENT-TODO.md section 7). Every URL in the source is relative so it runs on any host, but link
+previews need an absolute image URL.
 
 ## Notes for developers
 
