@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>LUX | Asian Restaurant &amp; Bar in Waukee, IA</title>
-<meta name="description" content="Modern Asian fusion and craft cocktails in Waukee, Iowa. Vietnamese-forward cooking and a lounge with a backlit bar. Lunch daily, dinner nightly.">
+<meta name="description" content="Modern Asian gastro and craft cocktails in Waukee, Iowa. Phở, galbi and wood-fire steaks in a lounge with a backlit bar. Lunch daily, dinner nightly.">
 <meta name="theme-color" content="#070602">
 <meta name="color-scheme" content="dark">
 
@@ -57,7 +57,8 @@
   "logo": "assets/lux-logo-gold-full.png",
   "telephone": "+1-515-209-9999",
   "email": "lux@luxwaukee.com",
-  "servesCuisine": ["Asian Fusion", "Vietnamese"],
+  "servesCuisine": ["Modern Asian", "Asian Fusion", "Vietnamese", "Korean"],
+  "hasMenu": "#menu",
   "acceptsReservations": true,
   "address": {
     "@type": "PostalAddress",
@@ -101,6 +102,7 @@
     <symbol id="i-next" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></symbol>
     <symbol id="i-close" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M6 6l12 12M18 6L6 18"/></symbol>
     <symbol id="i-ig" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4.2"/></g><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor"/></symbol>
+    <symbol id="i-peanut" viewBox="0 0 20 20"><circle cx="10" cy="10" r="8.75" fill="none" stroke="currentColor" stroke-width="1.4"/><path fill="none" stroke="currentColor" stroke-width="1.7" stroke-linejoin="round" d="M7.7 14.6V5.6h2.85a2.45 2.45 0 0 1 0 4.9H7.7"/></symbol>
     <symbol id="i-fb" viewBox="0 0 24 24"><path fill="currentColor" d="M13.6 21v-7.6h2.6l.4-3h-3V8.5c0-.9.3-1.5 1.5-1.5h1.6V4.3c-.3 0-1.2-.1-2.3-.1-2.3 0-3.9 1.4-3.9 4v2.2H8v3h2.6V21h3z"/></symbol>
   </defs>
 </svg>
@@ -217,10 +219,16 @@
 <section class="section menu" id="menu" aria-labelledby="menu-title" data-light>
   <div class="lamp" aria-hidden="true"></div>
   <div class="wrap">
-    <header class="section-head reveal">
-      <p class="eyebrow">Menu highlights</p>
-      <h2 class="display" id="menu-title">Fresh, bold, <em>Vietnamese-forward</em>.</h2>
-      <p class="section-head__intro">A first taste of the kitchen and the bar, from separate lunch and dinner menus. The full menus are coming to this page soon.</p>
+    <header class="section-head menu__head reveal">
+      <div class="menu__head-text">
+        <p class="eyebrow">The menu</p>
+        <h2 class="display" id="menu-title">Fresh, bold, <em class="nowrap">modern Asian</em>.</h2>
+        <p class="section-head__intro">Vietnamese, Korean and Japanese flavors on one card, from cold starters and small bites to <span lang="vi">phở</span>, noodles and the wood fire. The lunch menu and the full cocktail list are coming soon.</p>
+      </div>
+      <!-- Photo slot (desktops 1181px+): moved here from beside the Dinner card, which is now the full two-column menu -->
+      <figure class="menu__photo">
+        <div class="arch arch--lit"><img src="assets/photos/menu-dinner.svg" alt="Placeholder for a photo of a dish from the kitchen" width="800" height="1000" loading="lazy" decoding="async"></div>
+      </figure>
     </header>
 
     <div class="menu__tabs" data-tablist>
@@ -261,7 +269,7 @@
                   </li>
                 </ul>
               </section>
-              <p class="carte__soon">More of the kitchen’s signatures are on the Dinner card. The full lunch menu is coming soon.</p>
+              <p class="carte__soon">The full lunch menu is coming soon.<button class="link-btn carte__jump" type="button" data-tab-jump="tab-dinner">See the dinner menu</button></p>
             </div>
           </article>
           <figure class="panel__photo">
@@ -270,60 +278,235 @@
         </div>
       </div>
 
-      <!-- DINNER (the one card not hidden in the HTML; JS opens the tab for the service being served or coming next) -->
-      <div class="panel" id="panel-dinner">
-        <div class="panel__grid">
-          <article class="carte" aria-labelledby="carte-dinner">
-            <header class="carte__head">
-              <svg class="carte__mark" viewBox="0 0 1146 591" aria-hidden="true" focusable="false"><use href="#lux-script"/></svg>
-              <h3 class="carte__title" id="carte-dinner">Dinner</h3>
-              <p class="carte__hours" data-card-hours="Dinner"><span>Sun – Thu · 4:30 – 9:30 PM</span><span>Fri &amp; Sat · 4:30 – 11:00 PM</span></p>
-            </header>
-            <div class="carte__cols">
-              <section class="course">
-                <h4 class="course__title" id="course-begin"><span class="course__no" aria-hidden="true">I</span> To begin</h4>
+      <!-- DINNER: the owner's printed food menu, word for word (39 dishes). It is the tab that opens by default
+           (js/config.js: menuTabFollowsService). One dish = one <li class="dish">; README.md "Menu" explains how to
+           edit a dish or a price. On desktops the two columns follow the printed card; on phones it is one column. -->
+      <div class="panel panel--dinner" id="panel-dinner">
+        <nav class="menu-index" aria-label="Dinner menu sections" data-menu-index>
+          <ul class="menu-index__list" role="list">
+            <li><a class="chip" href="#course-cold">Starters</a></li>
+            <li><a class="chip" href="#course-bites">Small Bites</a></li>
+            <li><a class="chip" href="#course-picks">Chef’s Picks</a></li>
+            <li><a class="chip" href="#course-kids">Kids</a></li>
+            <li><a class="chip" href="#course-noods">Noods</a></li>
+            <li><a class="chip" href="#course-entrees">Entrées</a></li>
+            <li><a class="chip" href="#course-sides">Sides</a></li>
+            <li><a class="chip" href="#course-desserts">Desserts</a></li>
+          </ul>
+        </nav>
+
+        <article class="carte carte--full" aria-labelledby="carte-dinner">
+          <header class="carte__head">
+            <svg class="carte__mark" viewBox="0 0 1146 591" aria-hidden="true" focusable="false"><use href="#lux-script"/></svg>
+            <h3 class="carte__title" id="carte-dinner">Dinner</h3>
+            <p class="carte__tagline">Modern Asian Gastro</p>
+            <p class="carte__hours" data-card-hours="Dinner"><span>Sun – Thu · 4:30 – 9:30 PM</span><span>Fri &amp; Sat · 4:30 – 11:00 PM</span></p>
+          </header>
+
+          <!-- Column a = the printed card's left column; column b = its right column -->
+          <div class="carte__grid">
+            <div class="carte__col carte__col--a">
+              <section class="course course--cold">
+                <h4 class="course__title" id="course-cold"><span class="course__no" aria-hidden="true">I</span> Cold Starters</h4>
                 <ul class="dishes" role="list">
                   <li class="dish">
-                    <p class="dish__line dish__line--priced"><span class="dish__name">Scallion Pancakes<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>8</span></p>
-                    <p class="dish__note">Crisp-edged, with chili crunch and sweet soy</p>
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Cucumber Wood Ear Salad<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>7</span></p>
+                    <p class="dish__note">chilled wood ear mushroom &amp; cucumber, chili-garlic vinaigrette</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">House <span class="nowrap">Salad<svg class="pn" aria-hidden="true" focusable="false"><use href="#i-peanut"/></svg></span><span class="visually-hidden">, contains peanuts</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>7</span></p>
+                    <p class="dish__note">crisp greens, black pepper shallot vinaigrette</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Watercress Tomato Salad<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>7</span></p>
+                    <p class="dish__note">watercress, tomato, shallot, house vinaigrette</p>
+                  </li>
+                </ul>
+              </section>
+              <section class="course course--bites">
+                <h4 class="course__title" id="course-bites"><span class="course__no" aria-hidden="true">II</span> Small Bites</h4>
+                <ul class="dishes" role="list">
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Crab Luxe Pockets<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>8</span></p>
+                    <p class="dish__note">crispy pockets, crab &amp; cream cheese</p>
                   </li>
                   <li class="dish">
                     <p class="dish__line dish__line--priced"><span class="dish__name">Mama’s Classic Egg Rolls<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>8</span></p>
-                    <p class="dish__note">Golden-fried, served with <span lang="vi">nước chấm</span></p>
+                    <p class="dish__note">golden-fried, <span lang="vi">nước chấm</span> dipping sauce</p>
                   </li>
                   <li class="dish">
-                    <p class="dish__line dish__line--priced"><span class="dish__name">Chargrilled Beef Lemongrass Skewers<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>9</span></p>
+                    <p class="dish__line dish__line--priced"><span class="dish__name">KFC (Korean Fried <span class="nowrap">Chicken Wings) (4)</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>9</span></p>
+                    <p class="dish__note">twice-fried wings, choice of sweet-spicy sriracha, garlic basil glaze or <span lang="vi">nước chấm</span></p>
                   </li>
-                  <li class="dish"><p class="dish__line"><span class="dish__name">Furikake Fries</span></p></li>
-                  <li class="dish"><p class="dish__line"><span class="dish__name">Korean Fried Chicken Wings</span></p></li>
-                  <li class="dish"><p class="dish__line"><span class="dish__name">Taiwanese Popcorn Chicken</span></p></li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Furikake Fries<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>8</span></p>
+                    <p class="dish__note">golden fries, furikake, yuzu kewpie</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Scallion Pancake<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>8</span></p>
+                    <p class="dish__note">flaky, crisp-edged, chili crunch &amp; sweet soy dip</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Grilled <span class="nowrap">Corn<svg class="pn" aria-hidden="true" focusable="false"><use href="#i-peanut"/></svg></span><span class="visually-hidden">, contains peanuts</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>8</span></p>
+                    <p class="dish__note">charred, buttered, scallion</p>
+                  </li>
+                  <li class="dish dish--featured">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Grilled <span class="nowrap">Tiger Prawns (4)<svg class="pn" aria-hidden="true" focusable="false"><use href="#i-peanut"/></svg></span><span class="visually-hidden">, contains peanuts</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>15</span></p>
+                    <p class="dish__note">meaty prawns &amp; house sweet chili sauce</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line"><span class="dish__name">Lemongrass <span class="nowrap">Satay Skewers<svg class="pn" aria-hidden="true" focusable="false"><use href="#i-peanut"/></svg></span><span class="visually-hidden">, contains peanuts</span></span></p>
+                    <p class="dish__note">chargrilled, peanut sauce</p>
+                    <ul class="dish__opts" role="list">
+                      <li class="dish__opt"><p class="dish__line dish__line--priced"><span class="dish__name">Beef<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>9</span></p></li>
+                      <li class="dish__opt"><p class="dish__line dish__line--priced"><span class="dish__name">Pork<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>8</span></p></li>
+                    </ul>
+                  </li>
                 </ul>
               </section>
-              <div class="carte__col">
-                <section class="course">
-                  <h4 class="course__title" id="course-noodle"><span class="course__no" aria-hidden="true">II</span> Noodle soups</h4>
-                  <ul class="dishes" role="list">
-                    <li class="dish"><p class="dish__line"><span class="dish__name">Bone Marrow Pho</span></p></li>
-                    <li class="dish">
-                      <p class="dish__line"><span class="dish__name" lang="vi">Bún Bò Huế</span></p>
-                      <p class="dish__note">Spicy lemongrass beef noodle soup</p>
-                    </li>
-                  </ul>
-                </section>
-                <section class="course">
-                  <h4 class="course__title" id="course-sweet"><span class="course__no" aria-hidden="true">III</span> Sweets</h4>
-                  <ul class="dishes" role="list">
-                    <li class="dish"><p class="dish__line"><span class="dish__name">Rainbow Sago</span></p></li>
-                    <li class="dish"><p class="dish__line"><span class="dish__name">Chocolate Mousse Dome</span></p></li>
-                  </ul>
-                </section>
-              </div>
+              <section class="course course--picks">
+                <h4 class="course__title" id="course-picks"><span class="course__no" aria-hidden="true">III</span> Chef’s Picks</h4>
+                <ul class="dishes" role="list">
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Kimchi Burger<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>19</span></p>
+                    <p class="dish__note">brioche bun, premium patty, American cheese, kimchi, house fries</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Combo Vermicelli <span class="nowrap">Noodle Bowl<svg class="pn" aria-hidden="true" focusable="false"><use href="#i-peanut"/></svg></span><span class="visually-hidden">, contains peanuts</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>25</span></p>
+                    <p class="dish__note">rice noodle, fresh mixed greens, marinated pork, egg roll, house <span lang="vi">nước chấm</span> sauce</p>
+                  </li>
+                  <li class="dish dish--featured">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Chicken <span lang="vi">Phở</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>24</span></p>
+                    <p class="dish__note">crafted with premium young Barred Silver Cross heritage chicken breed raised in New York’s Hudson Valley</p>
+                  </li>
+                  <li class="dish dish--featured">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Bone Marrow <span lang="vi">Phở</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>30</span></p>
+                    <p class="dish__note">slow-simmered beef broth, roasted marrow, rice noodles</p>
+                  </li>
+                  <li class="dish dish--featured">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Galbi<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>27</span></p>
+                    <p class="dish__note">Korean-style short rib, cucumber kimchi &amp; daikon, house steamed rice</p>
+                  </li>
+                </ul>
+              </section>
+              <section class="course course--kids">
+                <h4 class="course__title" id="course-kids"><span class="course__no" aria-hidden="true">IV</span> Kids</h4>
+                <ul class="dishes" role="list">
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Fried Rice<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>12</span></p>
+                    <p class="dish__note">choice of Chicken, Beef or Shrimp</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Kid <span lang="vi">Phở</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>13</span></p>
+                    <p class="dish__note">choice of Chicken or Beef</p>
+                  </li>
+                </ul>
+              </section>
             </div>
-            <p class="carte__foot">A first look at the kitchen’s signatures; ask us which are on the lunch menu. The full dinner menu is coming soon.</p>
-          </article>
-          <figure class="panel__photo">
-            <div class="arch arch--lit"><img src="assets/photos/menu-dinner.svg" alt="Placeholder for a photo of a signature dinner dish" width="800" height="1000" loading="lazy" decoding="async"></div>
-          </figure>
+            <div class="carte__col carte__col--b">
+              <section class="course course--noods">
+                <h4 class="course__title" id="course-noods"><span class="course__no" aria-hidden="true">V</span> Noods &amp; Fried Rice</h4>
+                <ul class="dishes" role="list">
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Short Rib <span class="nowrap">Dan Dan<svg class="pn" aria-hidden="true" focusable="false"><use href="#i-peanut"/></svg></span><span class="visually-hidden">, contains peanuts</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>29</span></p>
+                    <p class="dish__note">braised short rib, sesame-chili sauce, Taiwanese-style wheat noodles</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name"><span lang="vi">Bún Bò Huế</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>24</span></p>
+                    <p class="dish__note">iconic spicy lemongrass beef and pork noodle soup originating from the central Vietnamese imperial city of <span lang="vi">Huế</span></p>
+                  </li>
+                  <li class="dish dish--featured">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Short Rib <span lang="vi">Phở</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>29</span></p>
+                    <p class="dish__note">fall-off-the-bone, sliced beef tenderloin, brisket, meatballs, rice noodles</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Stir-Fried Ramen<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>21</span></p>
+                    <p class="dish__note">choice of chicken, beef or shrimp</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Lux Crab &amp; Pineapple <span class="nowrap">Fried Rice<svg class="pn" aria-hidden="true" focusable="false"><use href="#i-peanut"/></svg></span><span class="visually-hidden">, contains peanuts</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>26</span></p>
+                    <p class="dish__note">lump crab, pineapple, jasmine rice</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Lux <span class="nowrap">Fried Rice<svg class="pn" aria-hidden="true" focusable="false"><use href="#i-peanut"/></svg></span><span class="visually-hidden">, contains peanuts</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>19</span></p>
+                    <p class="dish__note">house wok-fried Japanese rice, egg, scallion</p>
+                    <ul class="dish__opts" role="list">
+                      <li class="dish__opt"><p class="dish__line dish__line--priced"><span class="dish__name">Add Chicken<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>3</span></p></li>
+                      <li class="dish__opt"><p class="dish__line dish__line--priced"><span class="dish__name">Add Beef<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>4</span></p></li>
+                      <li class="dish__opt"><p class="dish__line dish__line--priced"><span class="dish__name">Add Shrimp<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>4</span></p></li>
+                    </ul>
+                  </li>
+                </ul>
+              </section>
+              <section class="course course--entrees">
+                <div class="course__head">
+                  <h4 class="course__title" id="course-entrees"><span class="course__no" aria-hidden="true">VI</span> Entrées</h4>
+                  <p class="course__kicker">Choice of two sides</p>
+                </div>
+                <ul class="dishes" role="list">
+                  <li class="dish">
+                    <p class="dish__line"><span class="dish__name dish__name--italic">Wood Fire Steak with “Crack” Sauce</span></p>
+                    <p class="dish__note">chargrilled over the wood fire</p>
+                    <ul class="dish__opts" role="list">
+                      <li class="dish__opt"><p class="dish__line dish__line--priced"><span class="dish__name">New York Strip <span class="dish__size">12 oz</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>38</span></p></li>
+                      <li class="dish__opt"><p class="dish__line dish__line--priced"><span class="dish__name">Ribeye <span class="dish__size">12 oz</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>46</span></p></li>
+                      <li class="dish__opt"><p class="dish__line dish__line--priced"><span class="dish__name">Filet <span class="dish__size">8 oz</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>44</span></p></li>
+                    </ul>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Shaken Beef<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>30</span></p>
+                    <p class="dish__note">wok-seared beef tenderloin, garlic butter</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Grilled Pork Chop<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>28</span></p>
+                    <p class="dish__note">lemongrass-marinated, chargrilled</p>
+                  </li>
+                </ul>
+              </section>
+              <section class="course course--sides">
+                <h4 class="course__title" id="course-sides"><span class="course__no" aria-hidden="true">VII</span> Sides</h4>
+                <ul class="dishes dishes--compact" role="list">
+                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">Bean Sprout Banchan<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>4</span></p></li>
+                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">Spicy Cucumber Kimchi<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>4</span></p></li>
+                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">Cabbage Kimchi<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>4</span></p></li>
+                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">Watercress Tomato Salad<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>4</span></p></li>
+                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">House Steamed Rice<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>2</span></p></li>
+                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">Pickled Daikon &amp; Carrot<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>3</span></p></li>
+                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">Small Fried Rice<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>4</span></p></li>
+                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">Fries<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>5</span></p></li>
+                </ul>
+              </section>
+              <section class="course course--desserts">
+                <h4 class="course__title" id="course-desserts"><span class="course__no" aria-hidden="true">VIII</span> Desserts</h4>
+                <ul class="dishes" role="list">
+                  <li class="dish dish--featured">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Chocolate Mousse Dome<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>12</span></p>
+                    <p class="dish__note">dark chocolate mousse, fresh strawberry, crème anglaise</p>
+                  </li>
+                  <li class="dish dish--featured">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Bananas Foster Mousse Dome<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>13</span></p>
+                    <p class="dish__note">dark chocolate, banana mousse, candied peanut, crème anglaise</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Sago<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>9</span></p>
+                    <p class="dish__note">chilled coconut sago, tropical fruit, popping boba</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Mango Sticky Rice<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>9</span></p>
+                    <p class="dish__note">sweet coconut sticky rice, fresh mango, coconut flakes</p>
+                  </li>
+                </ul>
+              </section>
+            </div>
+          </div>
+
+          <p class="carte__legend"><span class="carte__legend-label">Allergen</span> <svg class="pn" aria-hidden="true" focusable="false"><use href="#i-peanut"/></svg><span class="visually-hidden">(P)</span> contains peanuts</p>
+        </article>
+
+        <div class="menu-fine">
+          <p>Allergen-friendly and gluten-free options available upon request. Please ask your server.</p>
+          <p>Parties of 5 or more are subject to a 20% gratuity.</p>
+          <p>Consuming raw or undercooked meats, poultry, seafood, shellfish, or eggs may increase your risk of foodborne illness, especially if you have certain medical conditions.</p>
         </div>
       </div>
 
@@ -352,7 +535,7 @@
     </div>
 
     <div class="menu__foot reveal">
-      <p>See today’s menu on</p>
+      <p>Follow along on</p>
       <div class="menu__foot-links">
         <a class="btn btn--ghost btn--sm" href="https://www.facebook.com/p/LUX-Waukee-61589835900324/" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-fb"/></svg>Facebook<span class="visually-hidden"> (opens in a new tab)</span></a>
         <a class="btn btn--ghost btn--sm" href="https://www.instagram.com/luxwaukee/" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-ig"/></svg>Instagram<span class="visually-hidden"> (opens in a new tab)</span></a>
@@ -400,7 +583,7 @@
       <p class="eyebrow">Our story</p>
       <h2 class="display" id="about-title">Lux is Latin <br class="br-md">for <em>light</em>.</h2>
       <p class="manifesto">Modern Asian fusion cuisine, served from a curated menu of fresh, bold ingredients, alongside an extensive selection of craft cocktails. A room designed for those who appreciate a <span class="nowrap">high-end</span> dining environment, without compromising on authentic taste.</p>
-      <p>LUX opened in mid-August 2026 in the Kettlestone Lakes development, off I-80 and Grand Prairie Parkway. It is the work of three Vietnamese friends who call themselves the LTJ Group, and the cooking is Vietnamese-forward. In the kitchen is Chef Raelynn Brockman, who previously cooked at Harbinger, HomeGrown and Cafe Trellis.</p>
+      <p>LUX opened in mid-August 2026 in the Kettlestone Lakes development, off I-80 and Grand Prairie Parkway. It is the work of three Vietnamese friends who call themselves the LTJ Group, and the cooking is Vietnamese-forward, with Korean and Japanese accents across the menu. In the kitchen is Chef Raelynn Brockman, who previously cooked at Harbinger, HomeGrown and Cafe Trellis.</p>
       <p>The lounge is built around a <strong>backlit bar</strong> and <strong><span class="nowrap">half-moon</span> booths</strong>, and the dining room has the energy of a downtown hot spot.</p>
     </div>
 

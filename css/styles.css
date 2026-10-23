@@ -86,7 +86,7 @@ abbr[title] { text-decoration: none; }
   outline-offset: 3px;
   border-radius: 4px;
 }
-main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabindex="-1"]:focus, h3[tabindex="-1"]:focus { outline: none; }
+main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabindex="-1"]:focus, h3[tabindex="-1"]:focus, h4[tabindex="-1"]:focus { outline: none; }
 
 .nowrap { white-space: nowrap; }
 .visually-hidden {
@@ -671,7 +671,6 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
   font: 500 var(--fs-label)/1.6 var(--sans); letter-spacing: .18em; text-transform: uppercase; color: var(--gold);
 }
 .carte__hours span + span::before { content: '·'; margin: 0 .8em; color: var(--amber); }
-.carte__cols { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 40px clamp(28px, 3.6vw, 52px); }
 .carte__col { display: grid; gap: 40px; align-content: start; }
 .carte__body { max-width: 540px; margin: 0 auto; }
 .course__title {
@@ -694,7 +693,11 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
 }
 /* Dotted leader: starts right after the last word (even when the name wraps)
    and always runs at least 2em, so a long name never leaves a stub. */
-.dish__line--priced .dish__name { overflow: hidden; padding-right: 1.8em; }
+.dish__line--priced .dish__name {
+  overflow: hidden; padding-right: 1.8em;
+  /* the leader is cut at the box edge: fade its last few px (text never reaches them) so no half-dot shows */
+  -webkit-mask-image: linear-gradient(to left, transparent 0, #000 6px); mask-image: linear-gradient(to left, transparent 0, #000 6px);
+}
 .dish__dots {
   display: inline-block; vertical-align: baseline;
   width: 100%; height: .32em; padding-left: .4em; margin-right: calc(-100% - .4em);
@@ -715,7 +718,156 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
   font: 500 var(--fs-label)/1 var(--sans); font-style: normal; letter-spacing: .2em; text-transform: uppercase; color: var(--gold);
 }
 .carte__soon { margin: 32px 0 0; padding-top: 22px; border-top: 1px solid var(--line); text-align: center; font: italic 400 1.2rem/1.4 var(--serif); color: var(--cream-2); }
-.carte__foot { margin: clamp(30px, 3.6vw, 44px) 0 0; padding-top: 20px; border-top: 1px solid var(--line); text-align: center; font: italic 400 1.1rem/1.45 var(--serif); color: var(--muted); }
+.carte__jump { display: block; margin: 10px auto 0; font-style: normal; }
+.no-js .carte__jump { display: none; }
+
+/* ---------- The Dinner card: the owner's full printed menu ---------- */
+/* Section head: the dish photo slot sits beside the headline on wide screens */
+.menu__photo { display: none; margin: 0; }
+@media (min-width: 1181px) {
+  .menu__head { display: grid; grid-template-columns: minmax(0, 780px) minmax(0, 250px); justify-content: space-between; align-items: end; column-gap: 48px; max-width: none; }
+  .menu__photo { display: block; margin: 0 10px 10px 0; } /* room for the arch's offset outline */
+  /* it belongs to the Dinner card: Lunch and Drinks show their own photo beside the card */
+  .menu:has(#panel-dinner[hidden]) .menu__photo { visibility: hidden; }
+}
+
+.panel--dinner { --index-h: 55px; } /* height of the section-chip row (phones + tablets) */
+.carte.carte--full { max-width: 680px; margin-inline: auto; }
+.carte__tagline {
+  margin: 14px 0 0; padding-left: .4em;
+  font: 500 var(--fs-label)/1.4 var(--sans); letter-spacing: .4em; text-transform: uppercase; color: var(--cream-2);
+}
+.carte--full .carte__hours { margin-top: 8px; }
+.carte__grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 40px; }
+.carte--full .course__title { font-size: .8125rem; letter-spacing: .24em; }
+.carte--full .dishes { gap: 15px; }
+
+/* Chef's Picks: gold italic, as on the printed card */
+.carte--full .course--picks .course__title {
+  font: italic 500 1.32rem/1.1 var(--serif); letter-spacing: .12em; color: var(--gold-hi);
+  text-shadow: 0 0 18px rgba(255, 154, 46, .32);
+}
+/* Entrées: "Choice of two sides" sits at the end of the heading rule */
+.course__head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 16px; margin: 0 0 18px; }
+.course__head .course__title { flex: 1 1 auto; margin: 0; }
+.course__kicker { margin: 0; font: 500 var(--fs-label)/1.3 var(--sans); letter-spacing: .2em; text-transform: uppercase; color: var(--gold); }
+
+/* Names printed in gold on the card */
+.dish--featured > .dish__line .dish__name { color: var(--gold); }
+.dish__name--italic { font-style: italic; }
+/* (P) contains peanuts: a circled P after the name; the words are in visually hidden text */
+.pn {
+  display: inline-block; width: .66em; height: .66em; margin-left: .3em; vertical-align: -.02em;
+  color: var(--gold); overflow: visible;
+}
+/* Options and add-ons: indented sub-rows with small gold square bullets, each with its own price */
+.dish__opts { list-style: none; margin: 6px 0 0; padding: 0 0 0 .2em; display: grid; gap: 1px; font-size: 1.12rem; }
+.dish__opt { position: relative; padding-left: 1.2em; }
+.dish__opt::before {
+  content: ''; position: absolute; left: .1em; top: .66em;
+  width: 5px; height: 5px; background: var(--gold); opacity: .9;
+}
+.dish__opt .dish__name, .dish__opt .dish__price { font-size: 1em; line-height: 1.32; }
+.dish__opt .dish__name { color: var(--cream-2); }
+.dish__size { color: var(--muted); font-size: .9em; white-space: nowrap; font-variant-numeric: lining-nums; font-feature-settings: 'lnum' 1; }
+/* Sides: a compact name ... price list, two columns when there is room */
+.course--sides { container-type: inline-size; }
+.dishes--compact { display: block; columns: 1; column-gap: clamp(28px, 3.4vw, 44px); }
+.carte--full .dishes--compact > li { break-inside: avoid; padding-bottom: 9px; }
+.dishes--compact .dish__name, .dishes--compact .dish__price { font-size: 1.18rem; }
+@container (min-width: 500px) { .dishes--compact { columns: 2; } } /* from 500px every name fits on one line */
+
+.carte__legend {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px 10px;
+  margin: clamp(32px, 3.6vw, 48px) 0 0; padding-top: 20px; border-top: 1px solid var(--line);
+  font: italic 400 1.12rem/1.4 var(--serif); color: var(--cream-2);
+}
+.carte__legend-label { margin-right: 4px; font: 500 var(--fs-label)/1 var(--sans); letter-spacing: .26em; text-transform: uppercase; color: var(--gold); }
+.carte__legend .pn { width: 1.05rem; height: 1.05rem; margin: 0; vertical-align: middle; }
+
+/* Small print under the card (verbatim from the printed menu) */
+.menu-fine {
+  max-width: 72ch; margin: 22px auto 0; text-align: center;
+  font-size: .8125rem; line-height: 1.6; color: var(--muted);
+}
+.menu-fine p { margin: 0 0 .4em; }
+.menu-fine p:last-child { margin-bottom: 0; }
+
+/* Desktop: two columns, mirroring the printed card (left: I-IV; right: V-VIII) */
+@media (min-width: 961px) {
+  .carte.carte--full { max-width: none; padding-inline: clamp(36px, 4.6vw, 72px); }
+  .carte__grid {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 44px clamp(56px, 6.4vw, 104px);
+    position: relative;
+  }
+  .carte__col { gap: 44px; }
+  .carte__grid::before {
+    content: ''; position: absolute; top: 4px; bottom: 4px; left: 50%; width: 1px;
+    background: linear-gradient(180deg, rgba(221, 176, 107, 0), rgba(221, 176, 107, .26) 6%, rgba(221, 176, 107, .26) 94%, rgba(221, 176, 107, 0));
+  }
+  .menu-index { display: none; }
+}
+
+/* Phones + tablets: a row of section chips that sticks under the header while the card scrolls */
+.menu-index {
+  position: sticky; top: var(--header-h); z-index: 40;
+  margin: -6px calc(-1 * var(--gutter)) 18px;
+  padding: 3px 0;
+  border-bottom: 1px solid transparent;
+  transition: background-color .35s var(--ease), border-color .35s, box-shadow .35s;
+}
+.menu-index.is-stuck {
+  background: rgba(9, 7, 3, .92);
+  -webkit-backdrop-filter: blur(16px) saturate(1.2); backdrop-filter: blur(16px) saturate(1.2);
+  border-bottom-color: rgba(221, 176, 107, .22);
+  box-shadow: 0 18px 30px -24px rgba(0, 0, 0, .95);
+}
+.no-js .menu-index { position: static; }
+.menu-index__sentinel { height: 1px; margin-bottom: -1px; }
+.menu-index__list {
+  position: relative;
+  list-style: none; margin: 0; padding: 6px var(--gutter);
+  display: flex; gap: 8px;
+  overflow-x: auto; overscroll-behavior-x: contain; scroll-padding-inline: calc(var(--gutter) + 8px);
+  scrollbar-width: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 var(--gutter), #000 calc(100% - var(--gutter)), transparent);
+  mask-image: linear-gradient(90deg, transparent, #000 var(--gutter), #000 calc(100% - var(--gutter)), transparent);
+}
+.menu-index__list::-webkit-scrollbar { display: none; }
+.menu-index__list li { flex: none; }
+.menu-index__list li:first-child { margin-left: auto; }
+.menu-index__list li:last-child { margin-right: auto; }
+.chip {
+  display: inline-flex; align-items: center; min-height: 36px; padding: 0 15px;
+  border: 1px solid rgba(221, 176, 107, .4); border-radius: 999px;
+  background: rgba(7, 6, 2, .45);
+  color: var(--cream-2); text-decoration: none; white-space: nowrap;
+  font: 500 var(--fs-label)/1 var(--sans); letter-spacing: .14em; text-transform: uppercase;
+  -webkit-tap-highlight-color: transparent;
+  transition: color .25s, background-color .25s, border-color .25s, box-shadow .25s;
+}
+.chip:hover { color: var(--gold-hi); border-color: var(--gold); }
+.chip[aria-current="true"] {
+  color: #1b1007; background: var(--gold-grad); border-color: transparent;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .45), 0 6px 18px -8px rgba(255, 154, 46, .7);
+}
+.chip:focus-visible { outline: 2px solid var(--gold-hi); outline-offset: 2px; }
+/* a course heading lands below the header + the chip row */
+@media (max-width: 960px) {
+  .carte--full .course__title { scroll-margin-top: calc(var(--index-h) + 18px); }
+}
+/* very short screens (phones in landscape, desktop zoomed to 400%): the row stays a row of jump links at
+   the top of the card instead of sticking, so header + row never cover a third of the screen */
+@media (max-height: 520px) {
+  .menu-index { position: static; }
+  .panel--dinner { --index-h: 0px; }
+}
+@media (max-width: 560px) {
+  /* the kicker drops under the heading, aligned with its words */
+  .course__head { flex-direction: column; align-items: stretch; }
+  .course__kicker { padding-left: calc(1.3 * 1.35rem + 12px); }
+}
 
 .menu__foot {
   display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 14px 22px;
@@ -1196,8 +1348,7 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
   .tab__badge, .tab:first-child .tab__badge { left: 50%; transform: translateX(-50%); top: 6px; letter-spacing: .1em; gap: .4em; }
   .carte { padding: 34px 18px 28px; }
   .carte::before { inset: 5px; }
-  .carte__cols { grid-template-columns: minmax(0, 1fr); gap: 34px; }
-  .carte__col { gap: 34px; }
+  .carte__grid, .carte__col { gap: 34px; }
   .carte__hours { flex-direction: column; align-items: center; letter-spacing: .14em; }
   .carte__hours span + span::before { display: none; }
 
@@ -1324,11 +1475,17 @@ main:focus, section[tabindex="-1"]:focus, article[tabindex="-1"]:focus, h2[tabin
 @media (forced-colors: active) {
   .tab[aria-selected="true"] { border-bottom: 3px solid Highlight; }
   .tab[aria-selected="true"] .tab__name { text-decoration: underline; text-underline-offset: .15em; }
+  .chip[aria-current="true"] { border: 2px solid Highlight; text-decoration: underline; }
+  .menu-index.is-stuck { border-bottom-color: CanvasText; }
+  .pn { color: CanvasText; } /* the peanut mark is information: never left in brand gold */
+  /* dotted leaders and option bullets are backgrounds, which are stripped: redraw them in the text colour */
+  .dish__dots { forced-color-adjust: none; background-image: radial-gradient(circle at 1.5px 1.5px, CanvasText 1px, transparent 1.4px); }
+  .dish__opt::before { forced-color-adjust: none; background: CanvasText; }
 }
 
 /* Print: keep it useful */
 @media print {
-  .site-header, .dock, .grain, .hero__wall, .lamp, .lightbox, .menu__tabs { display: none !important; }
+  .site-header, .dock, .grain, .hero__wall, .lamp, .lightbox, .menu__tabs, .menu-index { display: none !important; }
   body { background: #fff; color: #000; }
   .menu .panel[hidden] { display: block !important; }
 }

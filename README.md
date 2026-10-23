@@ -13,8 +13,9 @@ from local press the owner should confirm, with the exact file and line to edit.
 ## What's on the page
 
 Header with a live open/closed status (Central time) · hero with the halo-lit sign and the hours strip ·
-press strip · menu highlights on printed-style cards (Lunch / Dinner / Drinks, opening on the service
-being served or coming next) · Reserve and Order panels · About · private events inquiry form · gallery with a
+press strip · the menu on printed-style cards (Lunch / Dinner / Drinks): the Dinner card is the owner's full
+printed food menu, two columns on desktop, one column with sticky section buttons on phones · Reserve and
+Order panels · About · private events inquiry form · gallery with a
 keyboard-accessible lightbox · Visit (address, directions, hours table, map on request) · footer.
 On phones a quick-action dock (Call · Reserve · Order · Directions) appears once you scroll past the hero.
 
@@ -59,8 +60,35 @@ once a link is set), and the events form hands guests a pre-filled email ("Almos
 claiming it was sent. CONTENT-TODO.md has a 3-step Formspree setup.
 
 ### Menu
-The menu cards live in `index.html` (search for `MENU`). Each dish is one `<li class="dish">` block;
-copy one to add a dish. Use the "priced" form (with the dotted leader) only when you have a price.
+The menu cards live in `index.html` (search for `MENU`); the full food menu is the **Dinner** card
+(search for `DINNER:`). Each dish is one `<li class="dish">` block, inside its course
+(`<section class="course">`, e.g. `id="course-bites"` for Small Bites). A typical dish:
+
+```html
+<li class="dish">
+  <p class="dish__line dish__line--priced"><span class="dish__name">Furikake Fries<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>8</span></p>
+  <p class="dish__note">golden fries, furikake, yuzu kewpie</p>
+</li>
+```
+
+- **Change a price:** edit the number right after `<span class="visually-hidden">$</span>` (here `8`).
+  Leave that hidden `$` in place: it isn't shown, but screen readers read it.
+- **Rename a dish or change its description:** edit the text before `<span class="dish__dots"` (the name)
+  or inside `<p class="dish__note">` (the description, lowercase as on the printed card).
+- **Add a dish:** copy a whole `<li class="dish">…</li>` block and edit it. Keep the `dish__line--priced`
+  class and the `dish__dots` span when it has a price (they draw the dotted leader); without a price, drop
+  both and the `dish__price` span (see the Wood Fire Steak). **Remove a dish:** delete its block.
+- **Options and add-ons** (Satay Beef/Pork, the steak cuts, "Add Chicken"…) are the `<li class="dish__opt">`
+  rows inside `<ul class="dish__opts">`; each has its own price, edited the same way.
+- **Contains peanuts:** wrap the end of the name with the mark, as on the House Salad, so the mark never
+  wraps alone (on a longer name wrap its last two words, as on the Combo Vermicelli `Noodle Bowl`):
+  `House <span class="nowrap">Salad<svg class="pn" aria-hidden="true" focusable="false"><use href="#i-peanut"/></svg></span><span class="visually-hidden">, contains peanuts</span>`.
+- **Name in gold** (as printed on the card): add `dish--featured` to the `<li>`, e.g. `<li class="dish dish--featured">`.
+- Sides are a compact list (name and price only), shown in two columns where there's room.
+
+The section buttons on phones (`<nav class="menu-index">`, just above the Dinner card) link to the course
+headings by id; if you add or rename a course, update its button too. Which tab opens first is set by
+`menuTabFollowsService` in `js/config.js` (CONTENT-TODO.md section 4).
 
 ### Photos
 Each photo slot is one file in `assets/photos/`. Save the real photo as JPG/WebP with the same name, change
@@ -90,10 +118,11 @@ luxwaukee.com) points at the host.
 ## Notes for developers
 
 - Without JavaScript the page is complete: the nav stays visible, all three menu cards show in turn (the
-  tab roles are added by JS), the events form uses the browser's own validation and posts to a mailto:
+  tab roles are added by JS; the Dinner card's section buttons are plain links), the events form uses the browser's own validation and posts to a mailto:
   address, and nothing is hidden behind animations.
 - Motion respects `prefers-reduced-motion`; the sign's flicker plays once per browser session.
-- Light effects run on IntersectionObserver, never on scroll events.
+- Light effects, the sticky section buttons' solid background and their "current course" highlight run on
+  IntersectionObserver, never on scroll events.
 - Header breakpoints are in `em` (60em = 960px at the default text size), so visitors who set a larger
   default font get the compact menu-button header instead of buttons pushed off-screen. `js/main.js` uses
   the same `60em` query for the mobile menu.

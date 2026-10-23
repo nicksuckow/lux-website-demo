@@ -321,8 +321,8 @@
     return st;
   }
 
-  // The menu opens on the service being served or, when closed, the one coming next
-  // (overnight and in the morning that is Lunch; between services, Dinner).
+  // With CFG.menuTabFollowsService, the menu opens on the service being served or, when
+  // closed, the one coming next (overnight and in the morning that is Lunch; between services, Dinner).
   function defaultServiceTab(now) {
     var st = getStatus(now);
     var s = st.service || st.next;
@@ -550,13 +550,109 @@
       });
     });
 
-    // open on the service being served or coming next (without JS every card shows)
-    var want = SERVICES.length ? defaultServiceTab(localNow()) : null;
+    // Open on the card the HTML shows (Dinner, the complete menu), or, with
+    // menuTabFollowsService, on the service being served or coming next.
+    // Without JS every card shows in turn.
+    var want = CFG.menuTabFollowsService && SERVICES.length ? defaultServiceTab(localNow()) : null;
     var start = want && tabs.filter(function (t) { return t.getAttribute('data-service') === want; })[0];
     select(start || initial || tabs[0], false, false);
 
+    // "See the dinner menu" and similar buttons inside a card switch tabs
+    $$('[data-tab-jump]').forEach(function (b) {
+      var t = doc.getElementById(b.getAttribute('data-tab-jump'));
+      if (t && tabs.indexOf(t) !== -1) b.addEventListener('click', function () { select(t, true, true); });
+    });
+
     window.addEventListener('resize', function () { moveGlow(selected()); });
     if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(function () { moveGlow(selected()); });
+  }
+
+  /* ------------------------------------------------------------------
+     6b. Dinner card section chips (phones + tablets; hidden by CSS on desktop).
+         The chips are plain links to the course headings, so they work without JS.
+         JS adds: a solid bar once it sticks under the header, and the chip of the
+         course being read (IntersectionObserver only: nothing runs per scroll frame).
+  ------------------------------------------------------------------ */
+  function initMenuIndex() {
+    var bar = $('[data-menu-index]');
+    if (!bar || !hasIO) return;
+    var list = $('.menu-index__list', bar);
+    var links = $$('a[href^="#"]', bar);
+    var sections = links.map(function (a) {
+      var h = doc.getElementById(a.getAttribute('href').slice(1));
+      return h && h.closest('.course');
+    });
+    var head = $('.carte__head', bar.parentNode);
+    if (!list || !head || sections.some(function (s) { return !s; })) return;
+
+    var current = -1, stickTop = 0, shift = 0, line = 0, sticky = true, ios = [];
+    var sentinel = doc.createElement('div');
+    sentinel.className = 'menu-index__sentinel';
+    sentinel.setAttribute('aria-hidden', 'true');
+    bar.parentNode.insertBefore(sentinel, bar);
+
+    function shown() { return bar.offsetParent !== null; } // display:none on desktop / other tabs
+    function setCurrent(i) {
+      if (i === current) return;
+      current = i;
+      links.forEach(function (a, j) {
+        if (j === i) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+      });
+      var a = links[i];
+      if (!a || !shown()) return;
+      // keep that chip in view inside the row (a horizontal scroll only: the page never moves)
+      var l = a.offsetLeft, r = l + a.offsetWidth, edge = 28;
+      if (l < list.scrollLeft + edge || r > list.scrollLeft + list.clientWidth - edge) {
+        var left = l - (list.clientWidth - a.offsetWidth) / 2;
+        if (list.scrollTo) list.scrollTo({ left: left, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+        else list.scrollLeft = left;
+      }
+    }
+    // Both observers call this. The bar is "stuck" once the spot it sits in has scrolled under
+    // the header. The course being read is the first one whose bottom is still below the line
+    // under the bar; none while the card's own header is still below that line.
+    // (The section observer also catches jumps that skip the sentinel's edge.)
+    function update() {
+      if (!shown()) return;
+      bar.classList.toggle('is-stuck', sticky && sentinel.getBoundingClientRect().top + shift < stickTop);
+      if (head.getBoundingClientRect().bottom > line) { setCurrent(-1); return; }
+      for (var i = 0; i < sections.length; i++) {
+        if (sections[i].getBoundingClientRect().bottom > line) { setCurrent(i); return; }
+      }
+      setCurrent(sections.length - 1);
+    }
+    function observe() {
+      ios.forEach(function (io) { io.disconnect(); });
+      var cs = getComputedStyle(bar);
+      sticky = cs.position === 'sticky'; // CSS makes it static on very short screens
+      stickTop = parseFloat(cs.top) || 0;
+      shift = parseFloat(cs.marginTop) || 0; // the bar starts this far from the sentinel
+      line = Math.round(stickTop + (sticky ? bar.offsetHeight || 54 : 0) + 20);
+      var stuck = new IntersectionObserver(update, { rootMargin: '-' + Math.round(stickTop - shift) + 'px 0px 0px 0px' });
+      stuck.observe(sentinel);
+      var spy = new IntersectionObserver(update, { rootMargin: '-' + line + 'px 0px 0px 0px' });
+      spy.observe(head);
+      sections.forEach(function (s) { spy.observe(s); });
+      ios = [stuck, spy];
+    }
+    observe();
+    var t = 0, w = window.innerWidth;
+    window.addEventListener('resize', function () {
+      clearTimeout(t);
+      t = setTimeout(function () { if (window.innerWidth !== w) { w = window.innerWidth; observe(); } }, 150);
+    });
+    // the sticky/static switch is a height query, so a height-only change re-measures too
+    var short = window.matchMedia && window.matchMedia('(max-height: 520px)');
+    if (short) {
+      if (short.addEventListener) short.addEventListener('change', observe);
+      else if (short.addListener) short.addListener(observe);
+    }
+    // a chip reached with Tab scrolls fully into the row (the browser only scrolls one that is entirely
+    // hidden); the row's scroll-padding keeps it clear of the edge fade
+    list.addEventListener('focusin', function (e) {
+      var a = e.target.closest && e.target.closest('a');
+      if (a && a.scrollIntoView) a.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+    });
   }
 
   /* ------------------------------------------------------------------
@@ -897,6 +993,7 @@
     initDock();
     initMobileMenu();
     initTabs();
+    initMenuIndex();
     initLightbox();
     initForm();
     initMap();

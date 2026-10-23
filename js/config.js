@@ -42,5 +42,15 @@ window.LUX_CONFIG = {
     { name: 'Lunch',  days: [0, 1, 2, 3, 4, 5, 6], open: '10:30', close: '14:30' },
     { name: 'Dinner', days: [0, 1, 2, 3, 4],       open: '16:30', close: '21:30' },
     { name: 'Dinner', days: [5, 6],                open: '16:30', close: '23:00' }
-  ]
+  ],
+
+  // ------------------------------------------------------------------------
+  // MENU TAB that opens first.
+  //   false = always the Dinner card, today the only complete menu. The "Now
+  //           serving" badge still marks whichever service is open.
+  //   true  = the service being served, otherwise the next one (Lunch overnight
+  //           and in the morning, Dinner between lunch and close). Switch to
+  //           true once a real lunch menu is on the Lunch card.
+  // ------------------------------------------------------------------------
+  menuTabFollowsService: false
 };
