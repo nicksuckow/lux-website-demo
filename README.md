@@ -7,9 +7,6 @@ It's a plain static site: one HTML page, one stylesheet, two small scripts and t
 no frameworks, no build step and no external scripts (only Google Fonts), and every URL is relative, so it
 runs on any static host, including in a sub-folder.
 
-**Before launch, read [CONTENT-TODO.md](CONTENT-TODO.md):** it lists every placeholder and every fact
-from local press the owner should confirm, with the exact file and line to edit.
-
 ## What's on the page
 
 Header with a live open/closed status (Central time) · hero with the halo-lit sign and the hours strip ·
@@ -41,7 +38,7 @@ js/config.js        THE place for links and hours (booking, ordering, form endpo
 js/main.js          behavior: live hours/status, menu tabs, mobile menu, dock, lightbox, form, map
 assets/             logo files, favicon, social-share image (og-image.jpg), the real sign photo
 assets/photos/      one placeholder SVG per photo slot, to be replaced by real photos
-CONTENT-TODO.md     what to confirm or supply, and where
+.github/workflows/  the GitHub Pages deploy
 ```
 
 ## Common updates
@@ -50,14 +47,20 @@ CONTENT-TODO.md     what to confirm or supply, and where
 Edit the `services` list in **`js/config.js`**. It drives the live status ("Open now · Lunch until
 2:30 PM", "Closing soon…" in a service's last 30 minutes, "Back at 4:30 PM for dinner"…), the hours table,
 the footer, the hero strip and the menu tabs. To close a day, leave that day out of every service. Then
-update the two hand-kept copies: the JSON-LD hours in `index.html` (for Google) and the static fallback
-text. CONTENT-TODO.md section 3 lists the lines.
+update the two hand-kept copies in `index.html`: the JSON-LD `openingHoursSpecification` in the `<head>`
+(for Google) and the static fallback hours text shown before the script runs (search for the times, e.g.
+`4:30`).
 
 ### Reservation, ordering and events-form links
 Fill in `reserveUrl`, `orderUrl` and `eventsFormEndpoint` in **`js/config.js`**. Until then, Reserve and
 Order fall back to calling the restaurant (the Reserve/Order panel text switches to booking/ordering online
 once a link is set), and the events form hands guests a pre-filled email ("Almost there…") instead of
-claiming it was sent. CONTENT-TODO.md has a 3-step Formspree setup.
+claiming it was sent.
+
+To have event inquiries delivered by email (Formspree, about 5 minutes): create a free form at
+**formspree.io** with **lux@luxwaukee.com** as the notification address, paste its endpoint (it looks like
+`https://formspree.io/f/abcdwxyz`) into `eventsFormEndpoint`, then send a test inquiry from the live site
+and confirm the address when Formspree asks.
 
 ### Menu
 The menu cards live in `index.html` (search for `MENU`); the full food menu is the **Dinner** card
@@ -88,13 +91,24 @@ The menu cards live in `index.html` (search for `MENU`); the full food menu is t
 
 The section buttons on phones (`<nav class="menu-index">`, just above the Dinner card) link to the course
 headings by id; if you add or rename a course, update its button too. Which tab opens first is set by
-`menuTabFollowsService` in `js/config.js` (CONTENT-TODO.md section 4).
+`menuTabFollowsService` in `js/config.js`: it's `false` (always open on Dinner, the full menu); set it to
+`true` once the Lunch card has a full menu, so the tab follows the service being served.
 
 ### Photos
-Each photo slot is one file in `assets/photos/`. Save the real photo as JPG/WebP with the same name, change
-the extension in `index.html` on the line(s) CONTENT-TODO.md section 5 lists, and update the `alt` text.
-Frames are fixed and photos are cropped to fit (never stretched), so any reasonable shape works; keep the
-subject near the center. Recommended pixel sizes are in the same table.
+Each photo slot is one file in `assets/photos/`. Save the real photo as JPG/WebP with the same base name,
+then in `index.html` search for the file name and change the extension (gallery photos appear twice: the
+link `href` and the image `src`), update the `alt` text (it starts "Placeholder for…"), and in the gallery
+remove "(photo to come)" from `data-caption`. Delete the old `.svg` once nothing references it.
+Frames are fixed and photos are cropped to fit from the center (never stretched), so any reasonable shape
+works; keep the subject near the middle and aim for 150–350 KB per photo.
+
+| File | Where it shows | Recommended size |
+|---|---|---|
+| `room-wide` | About, wide letterbox (cropped to 4:3 on phones) | 2400 × 1000 (12:5) |
+| `menu-dinner` | Menu, beside the headline (desktop) | 1000 × 1250 (4:5) |
+| `menu-lunch`, `menu-drinks` | Menu, beside the Lunch / Drinks cards (desktop) | 1000 × 1250 (4:5) |
+| `events` | Private events, beside the intro (tablet and desktop) | 1000 × 1250 (4:5) |
+| `gallery-*` (7 files) | Gallery tiles and lightbox | 1200 × 1500 (4:5) |
 
 ## Deploy
 
@@ -116,8 +130,10 @@ Any static host works. Upload or point it at this folder's contents (the folder 
   *Settings → Pages*, and the workflow then uses it automatically.
 
 **On hosts other than GitHub Pages,** make the social-card URLs absolute for that address before sharing a
-link (CONTENT-TODO.md section 7). Every URL in the source is relative so it runs on any host, but link
-previews need an absolute image URL.
+link. Every URL in the source is relative so it runs on any host, but link previews need an absolute image
+URL. In `index.html`: make `og:image` and `twitter:image` absolute (e.g.
+`https://luxwaukee.com/assets/og-image.jpg`), add `<meta property="og:url">` and `<link rel="canonical">`
+with the site address, and make the JSON-LD `image`, `logo` and `hasMenu` absolute and add its `url`.
 
 ## Notes for developers
 

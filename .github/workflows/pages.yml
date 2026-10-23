@@ -26,7 +26,7 @@ jobs:
       - id: pages
         uses: actions/configure-pages@v5
 
-      # Only the public site goes out (not README.md / CONTENT-TODO.md).
+      # Only the public site goes out (not README.md or the workflow files).
       # Link previews and search engines need absolute URLs, so fill them in for the
       # address Pages serves (this follows a custom domain automatically once one is set).
       - name: Assemble the public site

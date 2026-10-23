@@ -1,6 +1,5 @@
 /* ==========================================================================
    LUX site settings: the ONE place to change links and hours.
-   Every item here is also listed in CONTENT-TODO.md for the owner to confirm.
    Leave a link as '' to keep the current phone-based fallback.
    ========================================================================== */
 window.LUX_CONFIG = {
