@@ -30,8 +30,8 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <!-- Fonts load without blocking the first paint (display=swap); the <noscript> copy covers no-JS visitors -->
-<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fahkwang:wght@400;500&amp;family=Rosario:ital,wght@0,400;0,500;1,400&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fahkwang:wght@400;500&amp;family=Rosario:ital,wght@0,400;0,500;1,400&amp;display=swap"></noscript>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Fahkwang:ital,wght@0,400;0,500;1,500&amp;family=Rosario:ital,wght@0,400;0,500;1,400&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fahkwang:ital,wght@0,400;0,500;1,500&amp;family=Rosario:ital,wght@0,400;0,500;1,400&amp;display=swap"></noscript>
 <link rel="preload" as="image" href="assets/lux-logo-gold-full.webp" imagesrcset="assets/lux-logo-gold-600.webp 600w, assets/lux-logo-gold-full.webp 1164w" imagesizes="(max-width: 590px) 260px, (min-width: 600px) and (max-aspect-ratio: 4/5) 62vw, (max-width: 1340px) 44vw, 590px" type="image/webp">
 <link rel="stylesheet" href="css/styles.css">
 
@@ -97,6 +97,7 @@
     <symbol id="i-phone" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M6.6 3.5h2.6l1.6 4.3-2 1.3a11.5 11.5 0 0 0 6.1 6.1l1.3-2 4.3 1.6v2.6a2 2 0 0 1-2.1 2A16.6 16.6 0 0 1 4.6 5.6a2 2 0 0 1 2-2.1z"/></symbol>
     <symbol id="i-calendar" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><rect x="3.5" y="5" width="17" height="15.5" rx="2.5"/><path d="M8 3v4M16 3v4M3.5 10h17M8.5 14.5h2M13.5 14.5h2"/></g></symbol>
     <symbol id="i-bag" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M5.5 8.5h13l-1.1 11a1.5 1.5 0 0 1-1.5 1.4H8.1a1.5 1.5 0 0 1-1.5-1.4z"/><path d="M9 8.5V7a3 3 0 0 1 6 0v1.5"/></g></symbol>
+    <symbol id="i-menu" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3.5" width="14" height="17" rx="1.5"/><path d="M8.5 8.5h7M8.5 12h7M8.5 15.5h4"/></g></symbol>
     <symbol id="i-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.6"><path stroke-linejoin="round" d="M12 21s-6.5-5.8-6.5-11.2a6.5 6.5 0 0 1 13 0C18.5 15.2 12 21 12 21z"/><circle cx="12" cy="9.8" r="2.4"/></g></symbol>
     <symbol id="i-prev" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M15 5l-7 7 7 7"/></symbol>
     <symbol id="i-next" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7"/></symbol>
@@ -130,7 +131,7 @@
         <span class="status-pill__long" data-status>Lunch daily · Dinner nightly</span>
         <span class="status-pill__short" data-status-short>Hours</span>
       </a>
-      <a class="btn btn--ghost btn--sm header-ctas__order" href="#order" data-order-link>Order Online</a>
+      <a class="btn btn--ghost btn--sm header-ctas__order" href="#order" data-order-link><span data-order-label>Order pickup</span></a>
       <a class="btn btn--gold btn--sm header-ctas__reserve" href="#reserve" data-reserve-link>Reserve</a>
     </div>
 
@@ -144,16 +145,16 @@
   <div class="mobile-menu" id="mobile-menu" hidden>
     <nav aria-label="Main">
       <ul class="mobile-menu__list">
-        <li><a href="#menu"><span class="mobile-menu__no" aria-hidden="true">01</span>Menu</a></li>
-        <li><a href="#about"><span class="mobile-menu__no" aria-hidden="true">02</span>About</a></li>
-        <li><a href="#events"><span class="mobile-menu__no" aria-hidden="true">03</span>Events</a></li>
-        <li><a href="#gallery"><span class="mobile-menu__no" aria-hidden="true">04</span>Gallery</a></li>
-        <li><a href="#visit"><span class="mobile-menu__no" aria-hidden="true">05</span>Visit</a></li>
+        <li><a href="#menu">Menu</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#events">Events</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#visit">Visit</a></li>
       </ul>
     </nav>
     <div class="mobile-menu__ctas">
       <a class="btn btn--gold" href="#reserve" data-reserve-link>Reserve</a>
-      <a class="btn btn--ghost" href="#order" data-order-link>Order Online</a>
+      <a class="btn btn--ghost" href="#order" data-order-link><span data-order-label>Order pickup</span></a>
     </div>
     <div class="mobile-menu__info">
       <p class="status-line"><span class="status-dot" aria-hidden="true"></span><span data-status>Lunch daily · Dinner nightly</span></p>
@@ -188,8 +189,8 @@
     <p class="hero__lede">Modern Asian fusion <span class="amp">&amp;</span> craft cocktails<span class="hero__where">Kettlestone Lakes · Waukee, Iowa</span></p>
     <div class="hero__ctas" id="hero-ctas">
       <a class="btn btn--gold" href="#reserve" data-reserve-link>Reserve a table</a>
-      <a class="btn btn--ghost" href="#order" data-order-link>Order for pickup</a>
-      <a class="hero__menu-link" href="#menu">Explore the menu <span aria-hidden="true">→</span></a>
+      <a class="btn btn--ghost" href="#order" data-order-link><span data-order-label>Order pickup</span></a>
+      <a class="hero__menu-link" href="#menu-tabs">Explore the menu <span aria-hidden="true">→</span></a>
     </div>
     <a class="status-pill hero__status" href="#visit" data-status-pill aria-label="Hours: lunch daily, dinner nightly. See hours and directions.">
       <span class="status-dot" aria-hidden="true"></span>
@@ -219,19 +220,24 @@
 <section class="section menu" id="menu" aria-labelledby="menu-title" data-light>
   <div class="lamp" aria-hidden="true"></div>
   <div class="wrap">
-    <header class="section-head menu__head reveal">
+    <header class="section-head menu__head">
       <div class="menu__head-text">
-        <p class="eyebrow">The menu</p>
-        <h2 class="display" id="menu-title">Fresh, bold, <em class="nowrap">modern Asian</em>.</h2>
-        <p class="section-head__intro">Vietnamese, Korean and Japanese flavors on one card, from cold starters and small bites to <span lang="vi">phở</span>, noodles and the wood fire. The lunch menu and the full cocktail list are coming soon.</p>
+        <h2 class="display" id="menu-title">Fresh, bold, <span class="nowrap">modern Asian</span>.</h2>
+        <p class="section-head__intro">Vietnamese, Korean and Japanese flavors, from cold starters and small bites to <span lang="vi">phở</span>, noodles and the wood fire. The lunch and dinner menus are below.</p>
       </div>
-      <!-- Photo slot (desktops 1181px+): moved here from beside the Dinner card, which is now the full two-column menu -->
-      <figure class="menu__photo">
-        <div class="arch arch--lit"><img src="assets/photos/menu-dinner.svg" alt="Placeholder for a photo of a dish from the kitchen" width="800" height="1000" loading="lazy" decoding="async"></div>
+      <!-- Photo slots (desktops 1181px+), one per full menu card, in the same spot: the CSS shows the one whose
+           card is open (Lunch or Dinner). The Drinks card keeps its own photo beside the card. -->
+      <figure class="menu__photo menu__photo--lunch">
+        <div class="arch"><img src="assets/photos/menu-lunch.svg" alt="Placeholder for a photo of a dish from the lunch menu" width="800" height="1000" loading="lazy" decoding="async"></div>
+        <figcaption class="photo-cap">From the lunch menu<span class="photo-cap__soon"><span class="photo-cap__dot"> · </span>photo to come</span></figcaption>
+      </figure>
+      <figure class="menu__photo menu__photo--dinner">
+        <div class="arch"><img src="assets/photos/menu-dinner.svg" alt="Placeholder for a photo of a dish from the dinner menu" width="800" height="1000" loading="lazy" decoding="async"></div>
+        <figcaption class="photo-cap">From the dinner menu<span class="photo-cap__soon"><span class="photo-cap__dot"> · </span>photo to come</span></figcaption>
       </figure>
     </header>
 
-    <div class="menu__tabs" data-tablist>
+    <div class="menu__tabs" id="menu-tabs" data-tablist>
       <button class="tab" id="tab-lunch" aria-controls="panel-lunch" type="button" data-service="Lunch">
         <span class="tab__badge" data-now-badge hidden>Now serving</span>
         <span class="tab__name">Lunch</span>
@@ -250,37 +256,213 @@
     </div>
 
     <div class="menu__panels">
-      <!-- LUNCH -->
-      <div class="panel" id="panel-lunch" hidden>
-        <div class="panel__grid">
-          <article class="carte carte--single" aria-labelledby="carte-lunch">
-            <header class="carte__head">
-              <svg class="carte__mark" viewBox="0 0 1146 591" aria-hidden="true" focusable="false"><use href="#lux-script"/></svg>
-              <h3 class="carte__title" id="carte-lunch">Lunch</h3>
-              <p class="carte__hours" data-card-hours="Lunch"><span>Daily · 10:30 AM – 2:30 PM</span></p>
-            </header>
-            <div class="carte__body">
-              <section class="course">
-                <h4 class="course__title" id="course-lunch"><span class="course__no" aria-hidden="true">I</span> At lunch</h4>
+      <!-- LUNCH: the owner's printed lunch menu, word for word (35 dishes), built like the Dinner card. It opens first
+           during lunch and overnight (js/config.js: menuTabFollowsService). The small print and the (P) legend repeat the
+           Dinner card's. On desktops the two columns follow the printed card; on phones it is one column. -->
+      <div class="panel panel--lunch" id="panel-lunch" hidden>
+        <nav class="menu-index" aria-label="Lunch menu sections" data-menu-index>
+          <ul class="menu-index__list" role="list">
+            <li><a class="chip" href="#lunch-course-cold">Starters</a></li>
+            <li><a class="chip" href="#lunch-course-bites">Small Bites</a></li>
+            <li><a class="chip" href="#lunch-course-handhelds">Hand-helds</a></li>
+            <li><a class="chip" href="#lunch-course-picks">Chef’s Picks</a></li>
+            <li><a class="chip" href="#lunch-course-noods">Noods</a></li>
+            <li><a class="chip" href="#lunch-course-sides">Sides</a></li>
+            <li><a class="chip" href="#lunch-course-desserts">Desserts</a></li>
+            <li><a class="chip" href="#lunch-course-beverages">Beverages</a></li>
+          </ul>
+        </nav>
+
+        <article class="carte carte--full" aria-labelledby="carte-lunch">
+          <header class="carte__head">
+            <svg class="carte__mark" viewBox="0 0 1146 591" aria-hidden="true" focusable="false"><use href="#lux-script"/></svg>
+            <h3 class="carte__title" id="carte-lunch">Lunch</h3>
+            <p class="carte__tagline">Modern Asian Gastro</p>
+            <p class="carte__hours" data-card-hours="Lunch"><span>Daily · 10:30 AM – 2:30 PM</span></p>
+          </header>
+
+          <!-- Column a = the printed card's left column; column b = its right column -->
+          <div class="carte__grid">
+            <div class="carte__col carte__col--a">
+              <section class="course course--cold">
+                <h4 class="course__title" id="lunch-course-cold">Cold Starters</h4>
                 <ul class="dishes" role="list">
                   <li class="dish">
-                    <p class="dish__line dish__line--priced"><span class="dish__name">Crispy Pork Belly <span class="nowrap">Bánh Mì</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>13</span></p>
-                    <p class="dish__note"><span class="tag">Lunch only</span></p>
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Cucumber Wood <span class="nowrap">Ear Salad</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>7</span></p>
+                    <p class="dish__note">chilled wood ear mushroom &amp; cucumber, chili-garlic vinaigrette</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">House <span class="nowrap">Salad<svg class="pn" aria-hidden="true" focusable="false"><use href="#i-peanut"/></svg></span><span class="visually-hidden">, contains peanuts</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>7</span></p>
+                    <p class="dish__note">crisp greens, black pepper shallot vinaigrette</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Watercress <span class="nowrap">Tomato Salad</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>7</span></p>
+                    <p class="dish__note">watercress, tomato, shallot, house vinaigrette</p>
                   </li>
                 </ul>
               </section>
-              <p class="carte__soon">The full lunch menu is coming soon.<button class="link-btn carte__jump" type="button" data-tab-jump="tab-dinner">See the dinner menu</button></p>
+              <section class="course course--bites">
+                <h4 class="course__title" id="lunch-course-bites">Small Bites</h4>
+                <ul class="dishes" role="list">
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Crab <span class="nowrap">Luxe Pockets</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>8</span></p>
+                    <p class="dish__note">crispy pockets, crab &amp; cream cheese</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Mama’s Classic <span class="nowrap">Egg Rolls</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>8</span></p>
+                    <p class="dish__note">golden-fried, <span lang="vi">nước chấm</span> dipping sauce</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">KFC (Korean Fried <span class="nowrap">Chicken Wings)</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>8</span></p>
+                    <p class="dish__note">twice-fried wings, choice of sweet-spicy sriracha, garlic basil glaze or <span lang="vi">nước chấm</span></p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Furikake Fries<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>8</span></p>
+                    <p class="dish__note">golden fries, furikake, yuzu kewpie</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Edamame<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>6</span></p>
+                    <p class="dish__note">garlic butter or spicy</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Scallion Pancake<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>8</span></p>
+                    <p class="dish__note">flaky, crisp-edged, chili crunch aioli</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Lemongrass <span class="nowrap">Satay Skewers<svg class="pn" aria-hidden="true" focusable="false"><use href="#i-peanut"/></svg></span><span class="visually-hidden">, contains peanuts</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>9</span></p>
+                    <p class="dish__note">choice of chicken or beef, chargrilled, peanut satay sauce, house pickle</p>
+                  </li>
+                </ul>
+              </section>
+              <section class="course course--handhelds">
+                <h4 class="course__title" id="lunch-course-handhelds">Hand-helds with Fries</h4>
+                <ul class="dishes" role="list">
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Kimchi Burger<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>16</span></p>
+                    <p class="dish__note">house made cabbage kimchi, brioche bun</p>
+                    <ul class="dish__opts" role="list">
+                      <li class="dish__opt"><p class="dish__line dish__line--priced"><span class="dish__name">Sub <span class="nowrap">Furikake Fries</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>3</span></p></li>
+                    </ul>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--kicker"><span class="dish__name"><span lang="vi">Bánh Mì</span></span><span class="dish__kicker">choice of</span></p>
+                    <ul class="dish__opts" role="list">
+                      <li class="dish__opt"><p class="dish__line dish__line--priced"><span class="dish__name">Braised <span class="nowrap">Pork Belly</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>16</span></p></li>
+                      <li class="dish__opt"><p class="dish__line dish__line--priced"><span class="dish__name">Grill Lemon Grass <span class="nowrap">Marinated Pork</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>16</span></p></li>
+                      <li class="dish__opt"><p class="dish__line dish__line--priced"><span class="dish__name">Chicken<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>13</span></p></li>
+                      <li class="dish__opt"><p class="dish__line dish__line--priced"><span class="dish__name">Braised <span class="nowrap">Short Rib</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>17</span></p></li>
+                    </ul>
+                  </li>
+                  <li class="dish dish--featured">
+                    <p class="dish__line dish__line--priced"><span class="dish__name dish__name--italic">Chicken <span class="nowrap">Katsu Sando</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>16</span></p>
+                    <p class="dish__note">Japanese style panko-crusted chicken thigh, shredded cabbage, kewpie mayo, milk bread</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Classic Fried <span class="nowrap">Chicken Sandwich</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>15</span></p>
+                  </li>
+                </ul>
+              </section>
             </div>
-          </article>
-          <figure class="panel__photo">
-            <div class="arch arch--lit"><img src="assets/photos/menu-lunch.svg" alt="Placeholder for a photo of the Crispy Pork Belly Bánh Mì" width="800" height="1000" loading="lazy" decoding="async"></div>
-          </figure>
+            <div class="carte__col carte__col--b">
+              <section class="course course--picks">
+                <h4 class="course__title" id="lunch-course-picks">Chef’s Picks</h4>
+                <ul class="dishes" role="list">
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Combo <span class="nowrap">Vermicelli Bowl<svg class="pn" aria-hidden="true" focusable="false"><use href="#i-peanut"/></svg></span><span class="visually-hidden">, contains peanuts</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>21</span></p>
+                    <p class="dish__note">marinated pork, egg roll, fresh green, <span lang="vi">nước chấm</span> sauce</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Grilled <span class="nowrap">Tiger Prawns (4)</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>15</span></p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Chicken <span lang="vi">Phở</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>20</span></p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Lux <span lang="vi">Phở</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>21</span></p>
+                    <ul class="dish__opts" role="list">
+                      <li class="dish__opt dish__opt--featured"><p class="dish__line dish__line--priced"><span class="dish__name dish__name--italic">Add Bone Marrow or <span class="nowrap">Short Rib</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>8</span></p></li>
+                    </ul>
+                  </li>
+                  <li class="dish dish--featured">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Galbi<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>24</span></p>
+                    <p class="dish__note">Korean-style grilled short rib, cucumber kimchi, house steamed rice</p>
+                  </li>
+                </ul>
+              </section>
+              <section class="course course--noods">
+                <h4 class="course__title" id="lunch-course-noods">Noods &amp; Rice</h4>
+                <ul class="dishes" role="list">
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name"><span lang="vi">Bún Bò Huế</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>21</span></p>
+                    <p class="dish__note">spicy lemongrass beef noodle soup</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Shaken Beef<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>23</span></p>
+                    <p class="dish__note">wok seared tenderloin, watercress and tomato salad, steamed rice</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Lux <span class="nowrap">Fried Rice<svg class="pn" aria-hidden="true" focusable="false"><use href="#i-peanut"/></svg></span><span class="visually-hidden">, contains peanuts</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>18</span></p>
+                    <p class="dish__note">house wok-fried Japanese rice choice of chicken, or beef, or shrimps, add additional protein $4</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Stir <span class="nowrap">Fried Ramen</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>19</span></p>
+                    <p class="dish__note">choice of chicken, beef or shrimps</p>
+                  </li>
+                </ul>
+              </section>
+              <section class="course course--sides">
+                <h4 class="course__title" id="lunch-course-sides">Sides</h4>
+                <ul class="dishes dishes--compact dishes--rows" role="list">
+                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">House Steamed <span class="nowrap">Jasmine Rice</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>2</span></p></li>
+                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">Spicy <span class="nowrap">Cucumber Kimchi</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>4</span></p></li>
+                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">Pickled Daikon <span class="nowrap">&amp; Carrot</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>3</span></p></li>
+                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">House <span class="nowrap">Cabbage Kimchi</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>4</span></p></li>
+                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">Small <span class="nowrap">Fried Rice</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>4</span></p></li>
+                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">Small Fries<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>4</span></p></li>
+                </ul>
+              </section>
+              <section class="course course--desserts">
+                <h4 class="course__title" id="lunch-course-desserts">Desserts</h4>
+                <ul class="dishes" role="list">
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Chocolate <span class="nowrap">Mousse Dome</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>10</span></p>
+                    <p class="dish__note">dark chocolate mousse, fresh strawberry, crème anglaise</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Bananas Foster <span class="nowrap">Mousse Dome</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>11</span></p>
+                    <p class="dish__note">dark chocolate, banana mousse, candy peanut, crème anglaise</p>
+                  </li>
+                  <li class="dish">
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Rainbow Sago<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>6</span></p>
+                    <p class="dish__note">chilled coconut sago, tropical fruit, popping boba</p>
+                  </li>
+                </ul>
+              </section>
+              <section class="course course--beverages">
+                <h4 class="course__title" id="lunch-course-beverages">Beverages</h4>
+                <ul class="dishes dishes--compact dishes--rows" role="list">
+                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">Vietnamese Coffee<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>7</span></p></li>
+                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">Hot <span class="nowrap">Jasmine Tea</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>5</span></p></li>
+                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">Soda<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>4</span></p></li>
+                </ul>
+              </section>
+            </div>
+          </div>
+
+          <p class="carte__legend"><span class="carte__legend-label">Allergen</span> <svg class="pn" aria-hidden="true" focusable="false"><use href="#i-peanut"/></svg><span class="visually-hidden">(P)</span> contains peanuts</p>
+        </article>
+
+        <div class="menu-fine">
+          <p>Allergen-friendly and gluten-free options available upon request. Please ask your server.</p>
+          <p>Parties of 5 or more are subject to a 20% gratuity.</p>
+          <p>Consuming raw or undercooked meats, poultry, seafood, shellfish, or eggs may increase your risk of foodborne illness, especially if you have certain medical conditions.</p>
         </div>
       </div>
 
-      <!-- DINNER: the owner's printed food menu, word for word (39 dishes). It is the tab that opens by default
-           (js/config.js: menuTabFollowsService). One dish = one <li class="dish">; README.md "Menu" explains how to
-           edit a dish or a price. On desktops the two columns follow the printed card; on phones it is one column. -->
+      <!-- DINNER: the owner's printed dinner menu, word for word (39 dishes). It opens first from the end of lunch
+           until closing (js/config.js: menuTabFollowsService), and always when that setting is off. One dish = one
+           <li class="dish">; README.md "Menu" explains how to edit a dish or a price. On desktops the two columns follow
+           the printed card; on phones it is one column. -->
       <div class="panel panel--dinner" id="panel-dinner">
         <nav class="menu-index" aria-label="Dinner menu sections" data-menu-index>
           <ul class="menu-index__list" role="list">
@@ -307,10 +489,10 @@
           <div class="carte__grid">
             <div class="carte__col carte__col--a">
               <section class="course course--cold">
-                <h4 class="course__title" id="course-cold"><span class="course__no" aria-hidden="true">I</span> Cold Starters</h4>
+                <h4 class="course__title" id="course-cold">Cold Starters</h4>
                 <ul class="dishes" role="list">
                   <li class="dish">
-                    <p class="dish__line dish__line--priced"><span class="dish__name">Cucumber Wood Ear Salad<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>7</span></p>
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Cucumber Wood <span class="nowrap">Ear Salad</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>7</span></p>
                     <p class="dish__note">chilled wood ear mushroom &amp; cucumber, chili-garlic vinaigrette</p>
                   </li>
                   <li class="dish">
@@ -318,20 +500,20 @@
                     <p class="dish__note">crisp greens, black pepper shallot vinaigrette</p>
                   </li>
                   <li class="dish">
-                    <p class="dish__line dish__line--priced"><span class="dish__name">Watercress Tomato Salad<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>7</span></p>
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Watercress <span class="nowrap">Tomato Salad</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>7</span></p>
                     <p class="dish__note">watercress, tomato, shallot, house vinaigrette</p>
                   </li>
                 </ul>
               </section>
               <section class="course course--bites">
-                <h4 class="course__title" id="course-bites"><span class="course__no" aria-hidden="true">II</span> Small Bites</h4>
+                <h4 class="course__title" id="course-bites">Small Bites</h4>
                 <ul class="dishes" role="list">
                   <li class="dish">
-                    <p class="dish__line dish__line--priced"><span class="dish__name">Crab Luxe Pockets<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>8</span></p>
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Crab <span class="nowrap">Luxe Pockets</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>8</span></p>
                     <p class="dish__note">crispy pockets, crab &amp; cream cheese</p>
                   </li>
                   <li class="dish">
-                    <p class="dish__line dish__line--priced"><span class="dish__name">Mama’s Classic Egg Rolls<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>8</span></p>
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Mama’s Classic <span class="nowrap">Egg Rolls</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>8</span></p>
                     <p class="dish__note">golden-fried, <span lang="vi">nước chấm</span> dipping sauce</p>
                   </li>
                   <li class="dish">
@@ -365,7 +547,7 @@
                 </ul>
               </section>
               <section class="course course--picks">
-                <h4 class="course__title" id="course-picks"><span class="course__no" aria-hidden="true">III</span> Chef’s Picks</h4>
+                <h4 class="course__title" id="course-picks">Chef’s Picks</h4>
                 <ul class="dishes" role="list">
                   <li class="dish">
                     <p class="dish__line dish__line--priced"><span class="dish__name">Kimchi Burger<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>19</span></p>
@@ -390,7 +572,7 @@
                 </ul>
               </section>
               <section class="course course--kids">
-                <h4 class="course__title" id="course-kids"><span class="course__no" aria-hidden="true">IV</span> Kids</h4>
+                <h4 class="course__title" id="course-kids">Kids</h4>
                 <ul class="dishes" role="list">
                   <li class="dish">
                     <p class="dish__line dish__line--priced"><span class="dish__name">Fried Rice<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>12</span></p>
@@ -405,7 +587,7 @@
             </div>
             <div class="carte__col carte__col--b">
               <section class="course course--noods">
-                <h4 class="course__title" id="course-noods"><span class="course__no" aria-hidden="true">V</span> Noods &amp; Fried Rice</h4>
+                <h4 class="course__title" id="course-noods">Noods &amp; Fried Rice</h4>
                 <ul class="dishes" role="list">
                   <li class="dish">
                     <p class="dish__line dish__line--priced"><span class="dish__name">Short Rib <span class="nowrap">Dan Dan<svg class="pn" aria-hidden="true" focusable="false"><use href="#i-peanut"/></svg></span><span class="visually-hidden">, contains peanuts</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>29</span></p>
@@ -440,15 +622,15 @@
               </section>
               <section class="course course--entrees">
                 <div class="course__head">
-                  <h4 class="course__title" id="course-entrees"><span class="course__no" aria-hidden="true">VI</span> Entrées</h4>
+                  <h4 class="course__title" id="course-entrees">Entrées</h4>
                   <p class="course__kicker">Choice of two sides</p>
                 </div>
                 <ul class="dishes" role="list">
                   <li class="dish">
-                    <p class="dish__line"><span class="dish__name dish__name--italic">Wood Fire Steak with “Crack” Sauce</span></p>
+                    <p class="dish__line"><span class="dish__name dish__name--italic">Wood Fire Steak with <span class="nowrap">“Crack” Sauce</span></span></p>
                     <p class="dish__note">chargrilled over the wood fire</p>
                     <ul class="dish__opts" role="list">
-                      <li class="dish__opt"><p class="dish__line dish__line--priced"><span class="dish__name">New York Strip <span class="dish__size">12 oz</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>38</span></p></li>
+                      <li class="dish__opt"><p class="dish__line dish__line--priced"><span class="dish__name">New <span class="nowrap">York Strip</span> <span class="dish__size">12 oz</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>38</span></p></li>
                       <li class="dish__opt"><p class="dish__line dish__line--priced"><span class="dish__name">Ribeye <span class="dish__size">12 oz</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>46</span></p></li>
                       <li class="dish__opt"><p class="dish__line dish__line--priced"><span class="dish__name">Filet <span class="dish__size">8 oz</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>44</span></p></li>
                     </ul>
@@ -458,33 +640,33 @@
                     <p class="dish__note">wok-seared beef tenderloin, garlic butter</p>
                   </li>
                   <li class="dish">
-                    <p class="dish__line dish__line--priced"><span class="dish__name">Grilled Pork Chop<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>28</span></p>
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Grilled <span class="nowrap">Pork Chop</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>28</span></p>
                     <p class="dish__note">lemongrass-marinated, chargrilled</p>
                   </li>
                 </ul>
               </section>
               <section class="course course--sides">
-                <h4 class="course__title" id="course-sides"><span class="course__no" aria-hidden="true">VII</span> Sides</h4>
+                <h4 class="course__title" id="course-sides">Sides</h4>
                 <ul class="dishes dishes--compact" role="list">
-                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">Bean Sprout Banchan<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>4</span></p></li>
-                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">Spicy Cucumber Kimchi<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>4</span></p></li>
+                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">Bean <span class="nowrap">Sprout Banchan</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>4</span></p></li>
+                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">Spicy <span class="nowrap">Cucumber Kimchi</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>4</span></p></li>
                   <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">Cabbage Kimchi<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>4</span></p></li>
-                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">Watercress Tomato Salad<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>4</span></p></li>
-                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">House Steamed Rice<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>2</span></p></li>
-                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">Pickled Daikon &amp; Carrot<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>3</span></p></li>
-                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">Small Fried Rice<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>4</span></p></li>
+                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">Watercress <span class="nowrap">Tomato Salad</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>4</span></p></li>
+                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">House <span class="nowrap">Steamed Rice</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>2</span></p></li>
+                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">Pickled Daikon <span class="nowrap">&amp; Carrot</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>3</span></p></li>
+                  <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">Small <span class="nowrap">Fried Rice</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>4</span></p></li>
                   <li class="dish"><p class="dish__line dish__line--priced"><span class="dish__name">Fries<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>5</span></p></li>
                 </ul>
               </section>
               <section class="course course--desserts">
-                <h4 class="course__title" id="course-desserts"><span class="course__no" aria-hidden="true">VIII</span> Desserts</h4>
+                <h4 class="course__title" id="course-desserts">Desserts</h4>
                 <ul class="dishes" role="list">
                   <li class="dish dish--featured">
-                    <p class="dish__line dish__line--priced"><span class="dish__name">Chocolate Mousse Dome<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>12</span></p>
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Chocolate <span class="nowrap">Mousse Dome</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>12</span></p>
                     <p class="dish__note">dark chocolate mousse, fresh strawberry, crème anglaise</p>
                   </li>
                   <li class="dish dish--featured">
-                    <p class="dish__line dish__line--priced"><span class="dish__name">Bananas Foster Mousse Dome<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>13</span></p>
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Bananas Foster <span class="nowrap">Mousse Dome</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>13</span></p>
                     <p class="dish__note">dark chocolate, banana mousse, candied peanut, crème anglaise</p>
                   </li>
                   <li class="dish">
@@ -492,7 +674,7 @@
                     <p class="dish__note">chilled coconut sago, tropical fruit, popping boba</p>
                   </li>
                   <li class="dish">
-                    <p class="dish__line dish__line--priced"><span class="dish__name">Mango Sticky Rice<span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>9</span></p>
+                    <p class="dish__line dish__line--priced"><span class="dish__name">Mango <span class="nowrap">Sticky Rice</span><span class="dish__dots" aria-hidden="true"></span></span><span class="dish__price"><span class="visually-hidden">$</span>9</span></p>
                     <p class="dish__note">sweet coconut sticky rice, fresh mango, coconut flakes</p>
                   </li>
                 </ul>
@@ -521,20 +703,21 @@
             </header>
             <div class="carte__body">
               <section class="course">
-                <h4 class="course__title" id="course-cocktails"><span class="course__no" aria-hidden="true">I</span> Craft cocktails</h4>
+                <h4 class="course__title" id="course-cocktails">Craft cocktails</h4>
                 <p class="course__lede">An extensive list of craft cocktails, among them a key-lime-pie cocktail.</p>
               </section>
               <p class="carte__soon">The full cocktail list is coming soon.</p>
             </div>
           </article>
           <figure class="panel__photo">
-            <div class="arch arch--lit"><img src="assets/photos/menu-drinks.svg" alt="Placeholder for a photo of craft cocktails at the bar" width="800" height="1000" loading="lazy" decoding="async"></div>
+            <div class="arch"><img src="assets/photos/menu-drinks.svg" alt="Placeholder for a photo of craft cocktails" width="800" height="1000" loading="lazy" decoding="async"></div>
+            <figcaption class="photo-cap">Craft cocktails<span class="photo-cap__soon"><span class="photo-cap__dot"> · </span>photo to come</span></figcaption>
           </figure>
         </div>
       </div>
     </div>
 
-    <div class="menu__foot reveal">
+    <div class="menu__foot">
       <p>Follow along on</p>
       <div class="menu__foot-links">
         <a class="btn btn--ghost btn--sm" href="https://www.facebook.com/p/LUX-Waukee-61589835900324/" target="_blank" rel="noopener"><svg class="icon" aria-hidden="true" focusable="false"><use href="#i-fb"/></svg>Facebook<span class="visually-hidden"> (opens in a new tab)</span></a>
@@ -546,28 +729,22 @@
 
 <!-- ============ RESERVE + ORDER ============ -->
 <section class="section book" aria-labelledby="book-title" data-light>
-  <div class="lamp" aria-hidden="true"></div>
   <div class="wrap">
-    <header class="section-head section-head--center reveal">
-      <p class="eyebrow">Join us</p>
-      <h2 class="display" id="book-title">Pull up a seat. <em>Stay a while.</em></h2>
-    </header>
+    <h2 class="visually-hidden" id="book-title">Reserve or order pickup</h2>
 
     <div class="book__grid">
-      <article class="portal reveal" id="reserve" aria-labelledby="reserve-title">
+      <article class="portal" id="reserve" aria-labelledby="reserve-title">
         <div class="portal__glow" aria-hidden="true"></div>
-        <p class="portal__kicker">Reservations</p>
         <h3 class="portal__title" id="reserve-title">Reserve a table</h3>
         <p class="portal__text">Lunch, dinner or a late cocktail on a Friday night. <span data-reserve-text>Call us to book your table.</span></p>
         <a class="btn btn--gold" href="tel:+15152099999" data-reserve-cta><span data-reserve-label>Call to reserve</span></a>
         <p class="portal__alt"><a href="tel:+15152099999">(515) 209-9999</a></p>
       </article>
 
-      <article class="portal reveal" id="order" aria-labelledby="order-title">
+      <article class="portal" id="order" aria-labelledby="order-title">
         <div class="portal__glow" aria-hidden="true"></div>
-        <p class="portal__kicker">Takeout</p>
         <h3 class="portal__title" id="order-title">Order for pickup</h3>
-        <p class="portal__text">Take the flavors home. <span data-order-text>Call ahead and pick up your order at the restaurant.</span></p>
+        <p class="portal__text"><span data-order-text>Call ahead and pick up your order at the restaurant.</span></p>
         <a class="btn btn--gold" href="tel:+15152099999" data-order-cta><span data-order-label>Call for pickup</span></a>
         <p class="portal__alt"><a href="tel:+15152099999">(515) 209-9999</a></p>
       </article>
@@ -579,42 +756,44 @@
 <section class="section about" id="about" aria-labelledby="about-title" data-light>
   <div class="lamp" aria-hidden="true"></div>
   <div class="wrap about__grid">
-    <div class="about__story reveal">
+    <div class="about__story">
       <p class="eyebrow">Our story</p>
       <h2 class="display" id="about-title">Lux is Latin <br class="br-md">for <em>light</em>.</h2>
       <p class="manifesto">Modern Asian fusion cuisine, served from a curated menu of fresh, bold ingredients, alongside an extensive selection of craft cocktails. A room designed for those who appreciate a <span class="nowrap">high-end</span> dining environment, without compromising on authentic taste.</p>
       <p>LUX opened in mid-August 2026 in the Kettlestone Lakes development, off I-80 and Grand Prairie Parkway. It is the work of three Vietnamese friends who call themselves the LTJ Group, and the cooking is Vietnamese-forward, with Korean and Japanese accents across the menu. In the kitchen is Chef Raelynn Brockman, who previously cooked at Harbinger, HomeGrown and Cafe Trellis.</p>
-      <p>The lounge is built around a <strong>backlit bar</strong> and <strong><span class="nowrap">half-moon</span> booths</strong>, and the dining room has the energy of a downtown hot spot.</p>
+      <p>The lounge is built around a <strong>backlit bar</strong> and <strong><span class="nowrap">half-moon</span> booths</strong>, and the dining room has the energy of a downtown <span class="nowrap">hot spot</span>.</p>
     </div>
 
-    <figure class="signwall reveal">
+    <figure class="signwall">
       <div class="signwall__img">
         <img src="assets/sign-photo.jpg" alt="The real LUX sign on the restaurant wall: dark script letters halo-lit with a warm amber glow above the words Asian Restaurant &amp; Bar" width="1170" height="721" loading="lazy" decoding="async">
       </div>
-      <figcaption><span class="figno">The real thing</span> Our sign, halo-lit on the wall.</figcaption>
+      <figcaption>Our sign, halo-lit on the wall.</figcaption>
     </figure>
   </div>
 
-  <figure class="letterbox reveal">
-    <img src="assets/photos/room-wide.svg" alt="Placeholder for a wide photo of the LUX lounge after dark: the backlit bar and half-moon booths" width="2400" height="1000" loading="lazy" decoding="async">
+  <!-- Wide room shot: hidden while it is still the .svg placeholder (a 600px empty band); it appears by
+       itself once room-wide.jpg goes in (README.md, Photos) -->
+  <figure class="letterbox">
+    <div class="letterbox__frame"><img src="assets/photos/room-wide.svg" alt="Placeholder for a wide photo of the room after dark" width="2400" height="1000" loading="lazy" decoding="async"></div>
+    <figcaption class="photo-cap">The room, after dark<span class="photo-cap__soon"><span class="photo-cap__dot"> · </span>photo to come</span></figcaption>
   </figure>
 </section>
 
 <!-- ============ PRIVATE EVENTS ============ -->
 <section class="section events" id="events" aria-labelledby="events-title" data-light>
-  <div class="lamp" aria-hidden="true"></div>
   <div class="wrap events__grid">
-    <div class="events__copy reveal">
-      <p class="eyebrow">Private events</p>
-      <h2 class="display" id="events-title">Gather <em class="nowrap">in the glow</em>.</h2>
+    <div class="events__copy">
+      <h2 class="display" id="events-title">Private events</h2>
       <p class="lead">Birthdays, team dinners, rehearsal dinners, holiday parties. Tell us what you have in mind and our team will follow up with the details.</p>
       <figure class="events__photo">
-        <div class="arch arch--lit"><img src="assets/photos/events.svg" alt="Placeholder for a photo of a table set for a private event" width="800" height="1000" loading="lazy" decoding="async"></div>
+        <div class="arch"><img src="assets/photos/events.svg" alt="Placeholder for a photo of a private event" width="800" height="1000" loading="lazy" decoding="async"></div>
+        <figcaption class="photo-cap">A private event<span class="photo-cap__soon"><span class="photo-cap__dot"> · </span>photo to come</span></figcaption>
       </figure>
       <p class="events__direct">Prefer to talk it through? Call <a class="nowrap" href="tel:+15152099999">(515) 209-9999</a> or email <a href="mailto:lux@luxwaukee.com?subject=Private%20event%20inquiry">lux@luxwaukee.com</a>.</p>
     </div>
 
-    <div class="events__formwrap reveal">
+    <div class="events__formwrap">
       <form class="form" id="event-form" action="mailto:lux@luxwaukee.com?subject=Private%20event%20inquiry" method="post" enctype="text/plain" aria-labelledby="form-title">
         <h3 class="form__title" id="form-title">Event inquiry</h3>
         <p class="form__hint">Fields marked <span aria-hidden="true">*</span><span class="visually-hidden">with an asterisk</span> are required.</p>
@@ -690,55 +869,52 @@
 
 <!-- ============ GALLERY ============ -->
 <section class="section gallery" id="gallery" aria-labelledby="gallery-title" data-light>
-  <div class="lamp" aria-hidden="true"></div>
   <div class="wrap">
-    <header class="section-head gallery__head reveal">
-      <div>
-        <p class="eyebrow">Gallery</p>
-        <h2 class="display" id="gallery-title">After dark at <em>LUX</em>.</h2>
-      </div>
-      <a class="btn btn--ghost" href="https://www.instagram.com/luxwaukee/" target="_blank" rel="noopener">
+    <header class="section-head gallery__head">
+      <h2 class="display" id="gallery-title">Gallery</h2>
+      <a class="btn btn--ghost btn--sm" href="https://www.instagram.com/luxwaukee/" target="_blank" rel="noopener">
         <svg class="icon" aria-hidden="true" focusable="false"><use href="#i-ig"/></svg>
         Follow @luxwaukee<span class="visually-hidden"> on Instagram (opens in a new tab)</span>
       </a>
     </header>
 
+    <!-- A tile still showing its .svg placeholder is an <a> without href: a frame, not a link, and out of the
+         lightbox. Until the owner's photos arrive, the CSS shows the sign and the first three frames only;
+         tiles 5-8 appear by themselves once their .svg is replaced (README.md, Photos). -->
     <ul class="gallery__grid" role="list">
       <li><a class="gallery__item" href="assets/sign-photo.jpg" data-caption="The sign on our wall, halo-lit in amber">
         <span class="arch"><img src="assets/sign-photo.jpg" alt="The halo-lit LUX sign on the wall" width="1170" height="721" loading="lazy" decoding="async" class="is-photo"></span>
         <span class="gallery__cap">The sign</span></a></li>
-      <li><a class="gallery__item" href="assets/photos/gallery-signature-dish.svg" data-caption="Signature dish (photo to come)">
+      <li><a class="gallery__item" data-caption="Signature dish · photo to come">
         <span class="arch"><img src="assets/photos/gallery-signature-dish.svg" alt="Placeholder for a photo of a signature dish" width="800" height="1000" loading="lazy" decoding="async"></span>
-        <span class="gallery__cap">Signature dish</span></a></li>
-      <li><a class="gallery__item" href="assets/photos/gallery-cocktail.svg" data-caption="Craft cocktail (photo to come)">
-        <span class="arch"><img src="assets/photos/gallery-cocktail.svg" alt="Placeholder for a photo of a craft cocktail" width="800" height="1000" loading="lazy" decoding="async"></span>
-        <span class="gallery__cap">Craft cocktail</span></a></li>
-      <li><a class="gallery__item" href="assets/photos/gallery-backlit-bar.svg" data-caption="The backlit bar (photo to come)">
+        <span class="gallery__cap">Signature dish<span class="gallery__soon"><span class="gallery__dot"> · </span>photo to come</span></span></a></li>
+      <li><a class="gallery__item" data-caption="Craft cocktails · photo to come">
+        <span class="arch"><img src="assets/photos/gallery-cocktail.svg" alt="Placeholder for a photo of craft cocktails" width="800" height="1000" loading="lazy" decoding="async"></span>
+        <span class="gallery__cap">Craft cocktails<span class="gallery__soon"><span class="gallery__dot"> · </span>photo to come</span></span></a></li>
+      <li><a class="gallery__item" data-caption="The backlit bar · photo to come">
         <span class="arch"><img src="assets/photos/gallery-backlit-bar.svg" alt="Placeholder for a photo of the backlit bar" width="800" height="1000" loading="lazy" decoding="async"></span>
-        <span class="gallery__cap">The backlit bar</span></a></li>
-      <li><a class="gallery__item" href="assets/photos/gallery-half-moon-booths.svg" data-caption="Half-moon booths (photo to come)">
+        <span class="gallery__cap">The backlit bar<span class="gallery__soon"><span class="gallery__dot"> · </span>photo to come</span></span></a></li>
+      <li><a class="gallery__item" data-caption="Half-moon booths · photo to come">
         <span class="arch"><img src="assets/photos/gallery-half-moon-booths.svg" alt="Placeholder for a photo of the half-moon booths" width="800" height="1000" loading="lazy" decoding="async"></span>
-        <span class="gallery__cap">Half-moon booths</span></a></li>
-      <li><a class="gallery__item" href="assets/photos/gallery-dining-room.svg" data-caption="The dining room (photo to come)">
+        <span class="gallery__cap">Half-moon booths<span class="gallery__soon"><span class="gallery__dot"> · </span>photo to come</span></span></a></li>
+      <li><a class="gallery__item" data-caption="The dining room · photo to come">
         <span class="arch"><img src="assets/photos/gallery-dining-room.svg" alt="Placeholder for a photo of the dining room" width="800" height="1000" loading="lazy" decoding="async"></span>
-        <span class="gallery__cap">The dining room</span></a></li>
-      <li><a class="gallery__item" href="assets/photos/gallery-dessert.svg" data-caption="Dessert (photo to come)">
+        <span class="gallery__cap">The dining room<span class="gallery__soon"><span class="gallery__dot"> · </span>photo to come</span></span></a></li>
+      <li><a class="gallery__item" data-caption="Dessert · photo to come">
         <span class="arch"><img src="assets/photos/gallery-dessert.svg" alt="Placeholder for a photo of a dessert" width="800" height="1000" loading="lazy" decoding="async"></span>
-        <span class="gallery__cap">Dessert</span></a></li>
-      <li><a class="gallery__item" href="assets/photos/gallery-exterior.svg" data-caption="The exterior on Grand Prairie Parkway (photo to come)">
+        <span class="gallery__cap">Dessert<span class="gallery__soon"><span class="gallery__dot"> · </span>photo to come</span></span></a></li>
+      <li><a class="gallery__item" data-caption="Exterior · photo to come">
         <span class="arch"><img src="assets/photos/gallery-exterior.svg" alt="Placeholder for a photo of the restaurant exterior" width="800" height="1000" loading="lazy" decoding="async"></span>
-        <span class="gallery__cap">Exterior</span></a></li>
+        <span class="gallery__cap">Exterior<span class="gallery__soon"><span class="gallery__dot"> · </span>photo to come</span></span></a></li>
     </ul>
   </div>
 </section>
 
 <!-- ============ VISIT ============ -->
 <section class="section visit" id="visit" aria-labelledby="visit-title" data-light>
-  <div class="lamp" aria-hidden="true"></div>
   <div class="wrap visit__grid">
-    <div class="visit__info reveal">
-      <p class="eyebrow">Visit</p>
-      <h2 class="display" id="visit-title">Follow <em>the light</em>.</h2>
+    <div class="visit__info">
+      <h2 class="display" id="visit-title">Hours &amp; directions</h2>
       <p class="status-line visit__status"><span class="status-dot" aria-hidden="true"></span><span data-status>Lunch daily · Dinner nightly</span></p>
 
       <address class="visit__addr">
@@ -771,7 +947,7 @@
       </div>
     </div>
 
-    <div class="visit__map reveal">
+    <div class="visit__map">
       <div class="map" data-map>
         <div class="map__fallback">
           <span class="map__pin" aria-hidden="true"></span>
@@ -783,7 +959,6 @@
           <iframe class="map__frame" title="Google Map showing LUX at 3150 Grand Prairie Pkwy, Suite 150, Waukee, Iowa" src="https://maps.google.com/maps?q=3150%20Grand%20Prairie%20Pkwy%20Suite%20150%2C%20Waukee%2C%20IA%2050263&amp;output=embed" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>
         </template>
       </div>
-      <p class="map__caption">Off I-80 at Grand Prairie Parkway, in the Kettlestone Lakes development.</p>
     </div>
   </div>
 </section>
@@ -799,7 +974,6 @@
         <svg class="footer__mark" viewBox="0 0 1146 591" aria-hidden="true" focusable="false"><use href="#lux-script"/></svg>
         <span class="footer__tag" aria-hidden="true">Asian Restaurant &amp; Bar</span>
       </a>
-      <p class="footer__latin"><em>lux</em> (Latin): light.</p>
     </div>
 
     <div class="footer__cols">
@@ -832,7 +1006,7 @@
           <li><a href="#events">Private events</a></li>
           <li><a href="#gallery">Gallery</a></li>
           <li><a href="#reserve" data-reserve-link>Reserve</a></li>
-          <li><a href="#order" data-order-link>Order online</a></li>
+          <li><a href="#order" data-order-link><span data-order-label>Order pickup</span></a></li>
         </ul>
       </div>
     </div>
@@ -846,7 +1020,7 @@
 
 <!-- Mobile quick-action dock (phones only) -->
 <nav class="dock" aria-label="Quick actions">
-  <a class="dock__btn" href="tel:+15152099999"><svg aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span>Call</span></a>
+  <a class="dock__btn" href="tel:+15152099999" data-dock-call><svg aria-hidden="true" focusable="false"><use href="#i-phone"/></svg><span>Call</span></a>
   <a class="dock__btn dock__btn--key" href="tel:+15152099999" data-reserve-cta aria-label="Reserve: call (515) 209-9999"><svg aria-hidden="true" focusable="false"><use href="#i-calendar"/></svg><span>Reserve</span></a>
   <a class="dock__btn" href="tel:+15152099999" data-order-cta aria-label="Order for pickup: call (515) 209-9999"><svg aria-hidden="true" focusable="false"><use href="#i-bag"/></svg><span>Order</span></a>
   <a class="dock__btn" href="https://www.google.com/maps/dir/?api=1&amp;destination=3150+Grand+Prairie+Pkwy+Suite+150+Waukee+IA+50263" target="_blank" rel="noopener"><svg aria-hidden="true" focusable="false"><use href="#i-pin"/></svg><span>Directions</span><span class="visually-hidden"> (opens Google Maps in a new tab)</span></a>

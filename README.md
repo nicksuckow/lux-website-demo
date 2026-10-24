@@ -12,11 +12,13 @@ runs on any static host, including in a sub-folder.
 ## What's on the page
 
 Header with a live open/closed status (Central time) · hero with the halo-lit sign and the hours strip ·
-press strip · the menu on printed-style cards (Lunch / Dinner / Drinks): the Dinner card is the owner's full
-printed food menu, two columns on desktop, one column with sticky section buttons on phones · Reserve and
+press strip · the menu on printed-style cards (Lunch / Dinner / Drinks): the Lunch and Dinner cards are the
+owner's full printed menus, two columns on desktop, one column with sticky section buttons on phones · Reserve and
 Order panels · About · private events inquiry form · gallery with a
 keyboard-accessible lightbox · Visit (address, directions, hours table, map on request) · footer.
-On phones a quick-action dock (Call · Reserve · Order · Directions) appears once you scroll past the hero.
+On phones a quick-action dock appears once you scroll past the hero. It has one button per destination: while
+booking and ordering are both phone calls (no `reserveUrl` / `orderUrl` yet) it reads **Call to book · Menu ·
+Directions**; with both links set it reads Call · Reserve · Order · Directions.
 
 ## Preview it locally
 
@@ -39,7 +41,7 @@ css/styles.css      all styling (colors and sizes are CSS variables at the top)
 js/config.js        THE place for links and hours (booking, ordering, form endpoint, services)
 js/main.js          behavior: live hours/status, menu tabs, mobile menu, dock, lightbox, form, map
 assets/             logo files, favicon, social-share image (og-image.jpg), the real sign photo
-assets/photos/      one placeholder SVG per photo slot, to be replaced by real photos
+assets/photos/      one placeholder SVG per photo slot (light only, no drawing), to be replaced by real photos
 .github/workflows/  the GitHub Pages deploy
 ```
 
@@ -65,9 +67,10 @@ To have event inquiries delivered by email (Formspree, about 5 minutes): create 
 and confirm the address when Formspree asks.
 
 ### Menu
-The menu cards live in `index.html` (search for `MENU`); the full food menu is the **Dinner** card
-(search for `DINNER:`). Each dish is one `<li class="dish">` block, inside its course
-(`<section class="course">`, e.g. `id="course-bites"` for Small Bites). A typical dish:
+The menu cards live in `index.html` (search for `MENU`): the **Lunch** card (search for `LUNCH:`) and the
+**Dinner** card (search for `DINNER:`) are the owner's two printed menus, built the same way. Each dish is one
+`<li class="dish">` block, inside its course (`<section class="course">`, e.g. `id="course-bites"` for the
+Dinner Small Bites, `id="lunch-course-bites"` for the Lunch ones). A typical dish:
 
 ```html
 <li class="dish">
@@ -83,34 +86,61 @@ The menu cards live in `index.html` (search for `MENU`); the full food menu is t
 - **Add a dish:** copy a whole `<li class="dish">…</li>` block and edit it. Keep the `dish__line--priced`
   class and the `dish__dots` span when it has a price (they draw the dotted leader); without a price, drop
   both and the `dish__price` span (see the Wood Fire Steak). **Remove a dish:** delete its block.
-- **Options and add-ons** (Satay Beef/Pork, the steak cuts, "Add Chicken"…) are the `<li class="dish__opt">`
-  rows inside `<ul class="dish__opts">`; each has its own price, edited the same way.
+- **Options and add-ons** (Satay Beef/Pork, the steak cuts, "Add Chicken", the lunch Bánh Mì fillings…) are
+  the `<li class="dish__opt">` rows inside `<ul class="dish__opts">`; each has its own price, edited the same
+  way. An add-on printed in gold gets `dish__opt--featured` (the lunch "Add Bone Marrow or Short Rib"). A dish
+  priced only by its options carries its "choice of" note in `<span class="dish__kicker">` right after the name
+  (the lunch Bánh Mì).
 - **Contains peanuts:** wrap the end of the name with the mark, as on the House Salad, so the mark never
   wraps alone (on a longer name wrap its last two words, as on the Combo Vermicelli `Noodle Bowl`):
   `House <span class="nowrap">Salad<svg class="pn" aria-hidden="true" focusable="false"><use href="#i-peanut"/></svg></span><span class="visually-hidden">, contains peanuts</span>`.
 - **Name in gold** (as printed on the card): add `dish--featured` to the `<li>`, e.g. `<li class="dish dish--featured">`.
-- Sides are a compact list (name and price only), shown in two columns where there's room.
+  Printed in gold italic as well: also add `dish__name--italic` to its `dish__name` span (the Chicken Katsu Sando).
+- Sides (and the lunch Beverages) are a compact list (name and price only). Sides go into two columns only where
+  every name fits on one line (the one-column card on tablets); on desktops and phones they are one list. The lunch
+  Beverages sit in one row of three, name then price, as printed, wherever the three fit.
+- **Chef's Picks** is set in gold on both cards; on the Dinner card it is also italic, as printed (the page loads
+  Fahkwang italic 500 for that one heading).
 
-The section buttons on phones (`<nav class="menu-index">`, just above the Dinner card) link to the course
-headings by id; if you add or rename a course, update its button too. Which tab opens first is set by
-`menuTabFollowsService` in `js/config.js`: it's `false` (always open on Dinner, the full menu); set it to
-`true` once the Lunch card has a full menu, so the tab follows the service being served.
+Each card has its own row of section buttons on phones (`<nav class="menu-index">`, just above the card) that
+link to its course headings by id; if you add or rename a course, update its button too. Which tab opens first
+is set by `menuTabFollowsService` in `js/config.js`: it's `true`, so the menu opens on the service being served
+(Lunch during lunch and overnight, Dinner from the end of lunch until closing); `false` always opens on Dinner.
+A link straight to a course always opens its card first, at any hour: `…/#course-picks` (Dinner Chef's Picks),
+`…/#lunch-course-sides`, `…/#panel-dinner`.
 
 ### Photos
-Each photo slot is one file in `assets/photos/`. Save the real photo as JPG/WebP with the same base name,
-then in `index.html` search for the file name and change the extension (gallery photos appear twice: the
-link `href` and the image `src`), update the `alt` text (it starts "Placeholder for…"), and in the gallery
-remove "(photo to come)" from `data-caption`. Delete the old `.svg` once nothing references it.
+Each photo slot is one file in `assets/photos/`. Until the real photos arrive, each file is a placeholder: a
+dark frame with a pool of amber light and nothing drawn in it, and the slot's name sits in the caption under
+it, with "photo to come" on the line below.
+
+To put a photo in, save it as JPG/WebP with the same base name, then in `index.html` search for the file name,
+change the extension in the image `src`, and write an `alt` text that describes the photo (the placeholder's
+starts "Placeholder for…"). Then take out the "photo to come" note: in the caption, delete the
+`<span class="gallery__soon">…</span>` (gallery) or `<span class="photo-cap__soon">…</span>` (the other slots).
+**Gallery tiles also need a link:** a placeholder tile is `<a class="gallery__item" data-caption="…">` with no
+`href` (a frame, not a link, and not in the lightbox). Add `href="assets/photos/gallery-….jpg"` pointing at the
+same photo, and remove " · photo to come" from its `data-caption` (the lightbox caption). The tile then opens
+in the lightbox. Delete the old `.svg` once nothing references it.
+
+Two kinds of slot stay **hidden while they are still a placeholder**, so the page isn't mostly empty frames:
+the wide room shot under About (`room-wide`) and gallery tiles 5–8 (half-moon booths, dining room, dessert,
+exterior; until then the gallery shows the sign and three frames). Each appears by itself once its `src` no
+longer ends in `.svg`; nothing else needs changing.
 Frames are fixed and photos are cropped to fit from the center (never stretched), so any reasonable shape
 works; keep the subject near the middle and aim for 150–350 KB per photo.
 
 | File | Where it shows | Recommended size |
 |---|---|---|
-| `room-wide` | About, wide letterbox (cropped to 4:3 on phones) | 2400 × 1000 (12:5) |
-| `menu-dinner` | Menu, beside the headline (desktop) | 1000 × 1250 (4:5) |
-| `menu-lunch`, `menu-drinks` | Menu, beside the Lunch / Drinks cards (desktop) | 1000 × 1250 (4:5) |
+| `room-wide` | About, wide letterbox (cropped to 4:3 on phones); hidden until the photo is in | 2400 × 1000 (12:5) |
+| `menu-lunch`, `menu-dinner` | Menu, beside the headline while that card is open (desktop) | 1000 × 1250 (4:5) |
+| `menu-drinks` | Menu, beside the Drinks card (desktop) | 1000 × 1250 (4:5) |
 | `events` | Private events, beside the intro (tablet and desktop) | 1000 × 1250 (4:5) |
-| `gallery-*` (7 files) | Gallery tiles and lightbox | 1200 × 1500 (4:5) |
+| `gallery-*` (7 files) | Gallery tiles and lightbox; tiles 5–8 hidden until their photo is in | 1200 × 1500 (4:5) |
+
+For the owner: the gallery opens with the real sign photo (`assets/sign-photo.jpg`), which also appears in
+About, a page that already begins and ends with the sign. Once a few real photos are in, consider starting the
+gallery with one of them instead, or a sharper or differently framed shot of the sign.
 
 ## Deploy
 
@@ -140,11 +170,13 @@ with the site address, and make the JSON-LD `image`, `logo` and `hasMenu` absolu
 ## Notes for developers
 
 - Without JavaScript the page is complete: the nav stays visible, all three menu cards show in turn (the
-  tab roles are added by JS; the Dinner card's section buttons are plain links), the events form uses the browser's own validation and posts to a mailto:
+  tab roles are added by JS; the Lunch and Dinner cards' section buttons are plain links), the events form uses the browser's own validation and posts to a mailto:
   address, and nothing is hidden behind animations.
-- Motion respects `prefers-reduced-motion`; the sign's flicker plays once per browser session.
-- Light effects, the sticky section buttons' solid background and their "current course" highlight run on
-  IntersectionObserver, never on scroll events.
+- Motion respects `prefers-reduced-motion`; the sign's flicker plays once per browser session. The sign is the
+  one light show: nothing fades in on scroll and nothing loops, except the status dot in a service's last
+  30 minutes ("Closing soon").
+- The two lamps (Menu, About), the hairlines between sections, the sticky section buttons' solid background and
+  their "current course" highlight run on IntersectionObserver, never on scroll events.
 - Header breakpoints are in `em` (60em = 960px at the default text size), so visitors who set a larger
   default font get the compact menu-button header instead of buttons pushed off-screen. `js/main.js` uses
   the same `60em` query for the mobile menu.

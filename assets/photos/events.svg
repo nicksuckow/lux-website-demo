@@ -1,52 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000" role="img" aria-label="Placeholder: Private events (photo to come)">
-<style>@media (max-width: 332px) { .ph-label { display: none; } }</style>
-<defs>
-  <linearGradient id="wall" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#120d07"/><stop offset=".6" stop-color="#0E0A06"/><stop offset="1" stop-color="#070602"/></linearGradient>
-  <radialGradient id="pool" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#FF9A2E" stop-opacity=".55"/><stop offset=".35" stop-color="#874E11" stop-opacity=".32"/><stop offset="1" stop-color="#4C2807" stop-opacity="0"/></radialGradient>
-  <radialGradient id="soft" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#B98442" stop-opacity=".35"/><stop offset="1" stop-color="#4C2807" stop-opacity="0"/></radialGradient>
-  <radialGradient id="dot" cx=".5" cy=".5" r=".5"><stop offset="0" stop-color="#F4D696" stop-opacity="1"/><stop offset=".25" stop-color="#FF9A2E" stop-opacity=".7"/><stop offset="1" stop-color="#FF9A2E" stop-opacity="0"/></radialGradient>
-  <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#F4D696"/><stop offset=".5" stop-color="#DDB06B"/><stop offset="1" stop-color="#874E11"/></linearGradient>
-  <linearGradient id="panel" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FF9A2E" stop-opacity=".75"/><stop offset=".55" stop-color="#B98442" stop-opacity=".55"/><stop offset="1" stop-color="#874E11" stop-opacity=".35"/></linearGradient>
-  <linearGradient id="leather" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#2a1a0c"/><stop offset="1" stop-color="#0d0905"/></linearGradient>
-  <linearGradient id="beam" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4D696" stop-opacity=".28"/><stop offset="1" stop-color="#FF9A2E" stop-opacity="0"/></linearGradient>
-  <linearGradient id="liquid" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F4D696" stop-opacity=".9"/><stop offset="1" stop-color="#874E11" stop-opacity=".9"/></linearGradient>
-  <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#070602" stop-opacity="0"/><stop offset="1" stop-color="#070602" stop-opacity=".92"/></linearGradient>
-  <radialGradient id="vig" cx=".5" cy=".45" r=".75"><stop offset=".55" stop-color="#000" stop-opacity="0"/><stop offset="1" stop-color="#000" stop-opacity=".6"/></radialGradient>
-  <filter id="grain" x="0" y="0" width="100%" height="100%"><feTurbulence type="fractalNoise" baseFrequency=".8" numOctaves="2" stitchTiles="stitch" seed="7"/><feColorMatrix values="0 0 0 0 1  0 0 0 0 .86  0 0 0 0 .62  0 0 0 .075 0"/></filter>
-  <filter id="blur" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="16"/></filter>
-</defs>
-<rect width="800" height="1000" fill="url(#wall)"/>
-<path d="M64 600 L64 218.7 A98.7 98.7 0 0 1 261.3 218.7 L261.3 600 Z" fill="#100b06" stroke="#DDB06B" stroke-opacity=".4" stroke-width="2.4"/>
-<ellipse cx="162.7" cy="528" rx="108.5" ry="168" fill="url(#soft)"/>
-<path d="M301.3 600 L301.3 218.7 A98.7 98.7 0 0 1 498.7 218.7 L498.7 600 Z" fill="#100b06" stroke="#DDB06B" stroke-opacity=".4" stroke-width="2.4"/>
-<ellipse cx="400" cy="528" rx="108.5" ry="168" fill="url(#soft)"/>
-<path d="M538.7 600 L538.7 218.7 A98.7 98.7 0 0 1 736 218.7 L736 600 Z" fill="#100b06" stroke="#DDB06B" stroke-opacity=".4" stroke-width="2.4"/>
-<ellipse cx="637.3" cy="528" rx="108.5" ry="168" fill="url(#soft)"/>
-<path d="M304 550 L496 550 L736 840 L64 840 Z" fill="#160f08" stroke="#DDB06B" stroke-opacity=".45" stroke-width="2"/>
-<ellipse cx="347.2" cy="530.8" rx="30.7" ry="30.7" fill="url(#dot)" opacity=".7"/><rect x="342.9" y="534.6" width="8.6" height="15.4" fill="#F4D696" opacity=".7"/>
-<ellipse cx="400" cy="530.8" rx="30.7" ry="30.7" fill="url(#dot)" opacity=".7"/><rect x="395.7" y="534.6" width="8.6" height="15.4" fill="#F4D696" opacity=".7"/>
-<ellipse cx="452.8" cy="530.8" rx="30.7" ry="30.7" fill="url(#dot)" opacity=".7"/><rect x="448.5" y="534.6" width="8.6" height="15.4" fill="#F4D696" opacity=".7"/>
-<ellipse cx="324.3" cy="577" rx="36.9" ry="36.9" fill="url(#dot)" opacity=".7"/><rect x="319.1" y="581.6" width="10.4" height="18.4" fill="#F4D696" opacity=".7"/>
-<ellipse cx="400" cy="577" rx="36.9" ry="36.9" fill="url(#dot)" opacity=".7"/><rect x="394.8" y="581.6" width="10.4" height="18.4" fill="#F4D696" opacity=".7"/>
-<ellipse cx="475.7" cy="577" rx="36.9" ry="36.9" fill="url(#dot)" opacity=".7"/><rect x="470.5" y="581.6" width="10.4" height="18.4" fill="#F4D696" opacity=".7"/>
-<ellipse cx="301.4" cy="623.1" rx="43" ry="43" fill="url(#dot)" opacity=".7"/><rect x="295.4" y="628.5" width="12.1" height="21.5" fill="#F4D696" opacity=".7"/>
-<ellipse cx="400" cy="623.1" rx="43" ry="43" fill="url(#dot)" opacity=".7"/><rect x="394" y="628.5" width="12.1" height="21.5" fill="#F4D696" opacity=".7"/>
-<ellipse cx="498.6" cy="623.1" rx="43" ry="43" fill="url(#dot)" opacity=".7"/><rect x="492.5" y="628.5" width="12.1" height="21.5" fill="#F4D696" opacity=".7"/>
-<ellipse cx="278.6" cy="669.3" rx="49.2" ry="49.2" fill="url(#dot)" opacity=".7"/><rect x="271.6" y="675.4" width="13.8" height="24.6" fill="#F4D696" opacity=".7"/>
-<ellipse cx="400" cy="669.3" rx="49.2" ry="49.2" fill="url(#dot)" opacity=".7"/><rect x="393.1" y="675.4" width="13.8" height="24.6" fill="#F4D696" opacity=".7"/>
-<ellipse cx="521.4" cy="669.3" rx="49.2" ry="49.2" fill="url(#dot)" opacity=".7"/><rect x="514.5" y="675.4" width="13.8" height="24.6" fill="#F4D696" opacity=".7"/>
-<ellipse cx="255.7" cy="715.4" rx="55.3" ry="55.3" fill="url(#dot)" opacity=".7"/><rect x="247.9" y="722.4" width="15.6" height="27.6" fill="#F4D696" opacity=".7"/>
-<ellipse cx="400" cy="715.4" rx="55.3" ry="55.3" fill="url(#dot)" opacity=".7"/><rect x="392.2" y="722.4" width="15.6" height="27.6" fill="#F4D696" opacity=".7"/>
-<ellipse cx="544.3" cy="715.4" rx="55.3" ry="55.3" fill="url(#dot)" opacity=".7"/><rect x="536.5" y="722.4" width="15.6" height="27.6" fill="#F4D696" opacity=".7"/>
-<ellipse cx="232.8" cy="761.6" rx="61.4" ry="61.4" fill="url(#dot)" opacity=".7"/><rect x="224.2" y="769.3" width="17.3" height="30.7" fill="#F4D696" opacity=".7"/>
-<ellipse cx="400" cy="761.6" rx="61.4" ry="61.4" fill="url(#dot)" opacity=".7"/><rect x="391.4" y="769.3" width="17.3" height="30.7" fill="#F4D696" opacity=".7"/>
-<ellipse cx="567.2" cy="761.6" rx="61.4" ry="61.4" fill="url(#dot)" opacity=".7"/><rect x="558.6" y="769.3" width="17.3" height="30.7" fill="#F4D696" opacity=".7"/>
-<rect width="800" height="1000" fill="url(#vig)"/>
-<rect y="720" width="800" height="280" fill="url(#fade)"/>
-<rect width="800" height="1000" filter="url(#grain)"/>
-<g class="ph-label" text-anchor="middle" font-family="Jost, 'Helvetica Neue', Helvetica, Arial, sans-serif" font-weight="500">
-  <line x1="352" y1="864.2" x2="448" y2="864.2" stroke="#DDB06B" stroke-opacity=".55" stroke-width="2"/>
-  <text x="400" y="916.2" font-size="33.6" letter-spacing="5.4" fill="#F4D696" fill-opacity=".92">PRIVATE EVENTS</text>
-  <text x="400" y="967" font-size="28.9" letter-spacing="5.8" fill="#B98442">PHOTO TO COME</text>
-</g>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" width="800" height="1000">
+<radialGradient id="pool" gradientUnits="userSpaceOnUse" cx="0" cy="0" r="1" gradientTransform="translate(400 700) scale(620 460)">
+  <stop offset="0" stop-color="#FF9A2E" stop-opacity=".18"/>
+  <stop offset=".4" stop-color="#FF9A2E" stop-opacity=".085"/>
+  <stop offset=".75" stop-color="#FF9A2E" stop-opacity=".02"/>
+  <stop offset="1" stop-color="#FF9A2E" stop-opacity="0"/>
+</radialGradient>
+<rect width="800" height="1000" fill="#0E0A06"/>
+<rect width="800" height="1000" fill="url(#pool)"/>
 </svg>

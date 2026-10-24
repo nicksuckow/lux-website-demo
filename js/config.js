@@ -4,11 +4,15 @@
    ========================================================================== */
 window.LUX_CONFIG = {
   // Online booking page (Resy, OpenTable, Toast Tables, Tock...).
-  // '' = every "Reserve" button leads to "Call to reserve" / dials the restaurant.
+  // '' = every "Reserve" button leads to "Call to reserve" / dials the restaurant. On phones the dock's
+  //      gold button reads "Call to book" and its plain Call button is left out (both would dial the same number).
+  // Set = they read "Book online" (the Reserve panel) and open this page; the dock shows Call and Reserve.
   reserveUrl: '',
 
   // Online ordering page (Toast, ChowNow, Square...).
-  // '' = every "Order" button leads to "Call for pickup" / dials the restaurant.
+  // '' = the "Order pickup" links lead to "Call for pickup" / dial the restaurant. On phones the dock's
+  //      Order slot opens the food menu instead (the call button already covers pickup).
+  // Set = they read "Order online" and open this page, the dock's Order included.
   orderUrl: '',
 
   // Private-events form endpoint, e.g. 'https://formspree.io/f/xxxxxxx'.
@@ -45,11 +49,13 @@ window.LUX_CONFIG = {
 
   // ------------------------------------------------------------------------
   // MENU TAB that opens first.
-  //   false = always the Dinner card, today the only complete menu. The "Now
-  //           serving" badge still marks whichever service is open.
-  //   true  = the service being served, otherwise the next one (Lunch overnight
-  //           and in the morning, Dinner between lunch and close). Switch to
-  //           true once a real lunch menu is on the Lunch card.
+  //   true  = the service being served, otherwise the next one: the Lunch card
+  //           overnight, in the morning and during lunch; the Dinner card from
+  //           the end of lunch until closing.
+  //   false = always the Dinner card. The "Now serving" badge marks whichever
+  //           service is open either way.
+  // A link straight to a course (e.g. .../#course-picks, .../#lunch-course-sides)
+  // always opens the card that holds it, whatever this is set to.
   // ------------------------------------------------------------------------
-  menuTabFollowsService: false
+  menuTabFollowsService: true
 };

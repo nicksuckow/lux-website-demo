@@ -12,6 +12,7 @@
   var EMAIL = CFG.email || 'lux@luxwaukee.com';
   var PHONE = CFG.phone || '(515) 209-9999';
   var hasIO = 'IntersectionObserver' in window;
+  var openCardFor = function () {}; // set by initTabs
 
   /* ------------------------------------------------------------------
      1. Config: booking / ordering links, form endpoint, year
@@ -341,17 +342,15 @@
   }
 
   /* ------------------------------------------------------------------
-     3. Light: header state, light pools, hairlines, reveals, footer sign.
+     3. Light: header state, the two lamps, hairlines, footer sign.
         All IntersectionObserver driven: nothing runs per scroll frame.
   ------------------------------------------------------------------ */
   function initLight() {
     var header = $('.site-header');
     var lit = $$('[data-light]');
-    var reveals = $$('.reveal');
     var sign = $('[data-sign]');
     if (!hasIO) {
       lit.forEach(function (el) { el.classList.add('is-lit'); });
-      reveals.forEach(function (el) { el.classList.add('is-in'); });
       if (sign) sign.classList.add('is-lit');
       return;
     }
@@ -371,51 +370,46 @@
     }, { rootMargin: '0px 0px -12% 0px' });
     lit.forEach(function (el) { litIO.observe(el); });
 
-    if (reduceMotion.matches) {
-      reveals.forEach(function (el) { el.classList.add('is-in'); });
-    } else {
-      var revealIO = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) {
-          if (e.isIntersecting) { e.target.classList.add('is-in'); revealIO.unobserve(e.target); }
-        });
-      }, { rootMargin: '0px 0px -6% 0px', threshold: 0.01 });
-      reveals.forEach(function (el) { revealIO.observe(el); });
-    }
-
     if (sign) {
       var signIO = new IntersectionObserver(function (entries) {
         if (entries[0].isIntersecting) { sign.classList.add('is-lit'); signIO.disconnect(); }
       }, { threshold: 0.4 });
       signIO.observe(sign);
     }
-
-    // Pointer-reactive halo in the hero (fine pointers only, one rAF per move)
-    var hero = $('.hero');
-    if (hero && window.matchMedia('(pointer: fine)').matches) {
-      var raf = 0, mx = 0, my = 0;
-      hero.addEventListener('pointermove', function (ev) {
-        if (reduceMotion.matches) return;
-        var r = hero.getBoundingClientRect();
-        mx = (ev.clientX - r.left) / r.width - 0.5;
-        my = (ev.clientY - r.top) / r.height - 0.5;
-        if (!raf) raf = requestAnimationFrame(function () {
-          raf = 0;
-          hero.style.setProperty('--mx', mx.toFixed(3));
-          hero.style.setProperty('--my', my.toFixed(3));
-        });
-      });
-      hero.addEventListener('pointerleave', function () {
-        hero.style.setProperty('--mx', 0); hero.style.setProperty('--my', 0);
-      });
-    }
   }
 
   /* ------------------------------------------------------------------
-     4. Mobile dock: appears once the hero's buttons have scrolled away
+     4. Mobile dock: appears once the hero's buttons have scrolled away.
+        One button per destination: while reserving or ordering is a phone call, the buttons that would
+        dial the same number fold into one.
   ------------------------------------------------------------------ */
+  function setDockBtn(a, label, icon, aria) {
+    var span = $('span:not(.visually-hidden)', a), use = $('use', a);
+    if (span) span.textContent = label;
+    if (use) use.setAttribute('href', icon);
+    if (aria) a.setAttribute('aria-label', aria); else a.removeAttribute('aria-label');
+  }
+  function foldDock() {
+    var call = $('.dock [data-dock-call]');
+    var reserve = $('.dock [data-reserve-cta]');
+    var order = $('.dock [data-order-cta]');
+    var tel = CFG.phoneHref || 'tel:+15152099999';
+    // ordering by phone: the Call button below covers it, so this slot opens the food menu instead
+    if (order && !CFG.orderUrl) {
+      order.href = '#menu-tabs';
+      setDockBtn(order, 'Menu', '#i-menu', null);
+    }
+    // booking by phone: the gold button is the call, and the plain Call button would only repeat it
+    if (reserve && !CFG.reserveUrl) {
+      reserve.href = tel;
+      setDockBtn(reserve, 'Call to book', '#i-phone', 'Call to book: ' + PHONE);
+      if (call) call.hidden = true;
+    }
+  }
   function initDock() {
     var ctas = $('#hero-ctas');
     if (!ctas) return;
+    foldDock();
     if (hasIO) {
       new IntersectionObserver(function (en) {
         var e = en[0];
@@ -550,17 +544,48 @@
       });
     });
 
-    // Open on the card the HTML shows (Dinner, the complete menu), or, with
-    // menuTabFollowsService, on the service being served or coming next.
-    // Without JS every card shows in turn.
+    // The tab whose card holds el (a course heading, a dish, the panel itself), or the tab el is
+    function tabFor(el) {
+      if (!el) return null;
+      if (tabs.indexOf(el) !== -1) return el;
+      var panel = el.closest('[role="tabpanel"]');
+      return panel ? tabs.filter(function (t) { return t.getAttribute('aria-controls') === panel.id; })[0] || null : null;
+    }
+    function hashTarget() {
+      var id = location.hash.slice(1);
+      try { id = decodeURIComponent(id); } catch (e) { /* keep it raw */ }
+      return id ? doc.getElementById(id) : null;
+    }
+    // shared with the in-page links (section 11): opens the card that holds el, if it is closed
+    openCardFor = function (el) {
+      var t = tabFor(el);
+      if (t && t !== selected()) select(t, false, false);
+    };
+
+    // A link to a course (/#course-picks, /#lunch-course-sides, /#panel-dinner) opens that card, whatever
+    // the time. Otherwise, with menuTabFollowsService, open on the service being served or coming next
+    // (Lunch during lunch and overnight, Dinner from the end of lunch to closing), else on the card the
+    // HTML shows (Dinner). Without JS every card shows in turn, so those links work there too.
+    var linked = hashTarget();
+    var fromHash = tabFor(linked);
     var want = CFG.menuTabFollowsService && SERVICES.length ? defaultServiceTab(localNow()) : null;
     var start = want && tabs.filter(function (t) { return t.getAttribute('data-service') === want; })[0];
-    select(start || initial || tabs[0], false, false);
-
-    // "See the dinner menu" and similar buttons inside a card switch tabs
-    $$('[data-tab-jump]').forEach(function (b) {
-      var t = doc.getElementById(b.getAttribute('data-tab-jump'));
-      if (t && tabs.indexOf(t) !== -1) b.addEventListener('click', function () { select(t, true, true); });
+    select(fromHash || start || initial || tabs[0], false, false);
+    // the browser tried to scroll to the target while its card was still closed; scroll now it is open
+    // (and once more after the web fonts, unless the visitor has scrolled since)
+    if (fromHash && linked !== fromHash) {
+      requestAnimationFrame(function () {
+        linked.scrollIntoView({ block: 'start' });
+        var y = window.scrollY;
+        if (doc.fonts && doc.fonts.ready) doc.fonts.ready.then(function () { if (Math.abs(window.scrollY - y) < 2) linked.scrollIntoView({ block: 'start' }); });
+      });
+    }
+    // the same for a hash typed in, or reached with Back / Forward
+    window.addEventListener('hashchange', function () {
+      var el = hashTarget(), t = tabFor(el);
+      if (!t || t === selected()) return;
+      select(t, false, false);
+      if (el !== t) el.scrollIntoView({ block: 'start' });
     });
 
     window.addEventListener('resize', function () { moveGlow(selected()); });
@@ -568,14 +593,18 @@
   }
 
   /* ------------------------------------------------------------------
-     6b. Dinner card section chips (phones + tablets; hidden by CSS on desktop).
+     6b. Section chips of the Lunch and Dinner cards (phones + tablets; hidden by CSS on
+         desktop). One row per card, each sticking while its own card scrolls.
          The chips are plain links to the course headings, so they work without JS.
          JS adds: a solid bar once it sticks under the header, and the chip of the
          course being read (IntersectionObserver only: nothing runs per scroll frame).
+         A row inside a hidden card does nothing until its tab is opened.
   ------------------------------------------------------------------ */
   function initMenuIndex() {
-    var bar = $('[data-menu-index]');
-    if (!bar || !hasIO) return;
+    if (!hasIO) return;
+    $$('[data-menu-index]').forEach(initIndexBar);
+  }
+  function initIndexBar(bar) {
     var list = $('.menu-index__list', bar);
     var links = $$('a[href^="#"]', bar);
     var sections = links.map(function (a) {
@@ -592,20 +621,25 @@
     bar.parentNode.insertBefore(sentinel, bar);
 
     function shown() { return bar.offsetParent !== null; } // display:none on desktop / other tabs
+    function scrollRow(left) {
+      if (list.scrollTo) list.scrollTo({ left: left, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+      else list.scrollLeft = left;
+    }
     function setCurrent(i) {
       if (i === current) return;
       current = i;
       links.forEach(function (a, j) {
         if (j === i) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
       });
+      if (!shown()) return;
+      // back above the first course: the row returns to its start, so it opens on the first chip again
+      if (i === -1) { scrollRow(0); return; }
       var a = links[i];
-      if (!a || !shown()) return;
+      if (!a) return;
       // keep that chip in view inside the row (a horizontal scroll only: the page never moves)
       var l = a.offsetLeft, r = l + a.offsetWidth, edge = 28;
       if (l < list.scrollLeft + edge || r > list.scrollLeft + list.clientWidth - edge) {
-        var left = l - (list.clientWidth - a.offsetWidth) / 2;
-        if (list.scrollTo) list.scrollTo({ left: left, behavior: reduceMotion.matches ? 'auto' : 'smooth' });
-        else list.scrollLeft = left;
+        scrollRow(l - (list.clientWidth - a.offsetWidth) / 2);
       }
     }
     // Both observers call this. The bar is "stuck" once the spot it sits in has scrolled under
@@ -657,11 +691,19 @@
 
   /* ------------------------------------------------------------------
      7. Gallery lightbox (native <dialog>). Without JS the links open the image.
+        A tile still holding its .svg placeholder is an <a> without href in the HTML: a frame, not a link
+        (no tab stop, with or without JS), and it stays out of the lightbox. Once it has an href to a photo
+        (.jpg, .webp, .png, .avif) it opens here. An href left pointing at an .svg is dropped.
   ------------------------------------------------------------------ */
   function initLightbox() {
     var dlg = $('#lightbox');
-    var items = $$('.gallery__item');
+    var items = $$('.gallery__item[href]').filter(function (it) {
+      if (/\.(jpe?g|webp|png|avif)$/i.test(it.getAttribute('href'))) return true;
+      it.removeAttribute('href');
+      return false;
+    });
     if (!dlg || !items.length || typeof dlg.showModal !== 'function') return;
+    if (items.length < 2) dlg.classList.add('is-single'); // nothing to page through: no prev / next / count
     var img = doc.createElement('img');
     img.className = 'lightbox__img';
     img.alt = '';
@@ -701,6 +743,7 @@
     $('.lightbox__next', dlg).addEventListener('click', function () { show(idx + 1); });
     $('.lightbox__close', dlg).addEventListener('click', function () { dlg.close(); });
     dlg.addEventListener('keydown', function (e) {
+      if (items.length < 2) return;
       if (e.key === 'ArrowLeft') { e.preventDefault(); show(idx - 1); }
       else if (e.key === 'ArrowRight') { e.preventDefault(); show(idx + 1); }
       else if (e.key === 'Home') { e.preventDefault(); show(0); }
@@ -716,7 +759,7 @@
     dlg.addEventListener('touchend', function (e) {
       if (sx === null) return;
       var dx = e.changedTouches[0].clientX - sx;
-      if (Math.abs(dx) > 50) show(idx + (dx < 0 ? 1 : -1));
+      if (items.length > 1 && Math.abs(dx) > 50) show(idx + (dx < 0 ? 1 : -1));
       sx = null;
     });
   }
@@ -973,11 +1016,14 @@
       var target = doc.getElementById(id);
       if (!target) return;
       e.preventDefault();
+      openCardFor(target); // a course in the card that is not open: open it first
       var behavior = reduceMotion.matches ? 'auto' : 'smooth';
       if (id === 'top') window.scrollTo({ top: 0, behavior: behavior });
       else target.scrollIntoView({ behavior: behavior, block: 'start' });
       if (history.pushState) history.pushState(null, '', '#' + id);
       var focusEl = id === 'top' ? doc.getElementById('main') : target;
+      // the tab row (#menu-tabs): focus the open tab, so the arrow keys work from there
+      if (focusEl.getAttribute('role') === 'tablist') focusEl = $('[role="tab"][aria-selected="true"]', focusEl) || focusEl;
       if (!focusEl.hasAttribute('tabindex')) focusEl.setAttribute('tabindex', '-1');
       focusEl.focus({ preventScroll: true });
     });
